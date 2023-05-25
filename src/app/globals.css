@@ -137,3 +137,77 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+@keyframes appearing {
+  0% {
+    opacity: 0%;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+}
+
+@keyframes disappearing {
+  0% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0%;
+    transform: scale(0);
+  }
+}
+
+.counter.entering {
+  animation: appearing 0.3s forwards;
+}
+
+.counter.exiting {
+  animation: disappearing 0.3s forwards;
+}
+
+@keyframes disappearing {
+  0% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0%;
+    transform: scale(0);
+  }
+}
+
+@keyframes squeezeIn {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 45%;
+  }
+}
+
+@keyframes squeezeOut {
+  0% {
+    transform-origin: right;
+    transform: scaleX(0.45);
+  }
+
+  100% {
+    transform-origin: right;
+    transform: scaleX(1);
+  }
+}
+
+.add_button.entering {
+  animation: squeezeIn 0.1s forwards;
+}
+
+.add_button.exiting {
+  animation: squeezeOut 0.1s forwards;
+}
