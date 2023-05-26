@@ -1,4 +1,5 @@
 "use client";
+import "./ListItemAnimation.css";
 import { useState } from "react";
 import Image from "next/image";
 import { shopItemType } from "./mockedData";
@@ -39,7 +40,7 @@ export default function ListItem({ img, title, price }: shopItemType) {
       <Transition in={activeCounter} timeout={300} mountOnEnter unmountOnExit>
         {(state) => (
           <div
-            className={`counter ${state} flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold bg-dark-tangerine text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center
+            className={`counter ${state} flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold bg-summer-sky text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center
         ${counter > 1 && pulsingOut ? "animate-pulsing_out" : ""}
         ${counter > 0 && pulsingIn ? "animate-pulsing_in" : ""}
         `}
@@ -49,17 +50,23 @@ export default function ListItem({ img, title, price }: shopItemType) {
         )}
       </Transition>
       <div className="h-[78px]">
-        <Image src={img} width={74} height={74} alt="failed to load" />
+        <Image
+          className="rounded-full"
+          src={img}
+          width={74}
+          height={74}
+          alt="failed to load"
+        />
       </div>
-      <div className="text-[13px] flex">
-        <p className="font-normal">{title}</p>
+      <div className="text-[13px] flex items-center">
+        <p className="font-normal text-center">{title}</p>
         <p className="px-[4px]">·</p>
         <p className="font-bold">{price}</p>
       </div>
       <div className="w-[80px] flex justify-between relative">
         <button
           onClick={handleRemoveClick}
-          className={`cursor-pointer mt-[10px] bg-cinnabar text-white rounded-[8px] font-sans text-[14px] h-[30px] flex items-center justify-center ${
+          className={`cursor-pointer mt-[10px] bg-royal-blue text-white rounded-[8px] font-sans text-[14px] h-[30px] flex items-center justify-center ${
             counter === 0 ? "hidden" : "after:content-[''] w-[38px] text-[36px]"
           }`}
         >
@@ -74,7 +81,7 @@ export default function ListItem({ img, title, price }: shopItemType) {
           {(state) => (
             <div
               onClick={handleAddClick}
-              className={`add_button ${state} cursor-pointer mt-[10px] bg-dark-tangerine text-white rounded-[8px] font-sans text-[14px] h-[30px] flex items-center justify-center ${
+              className={`add_button ${state} cursor-pointer mt-[10px] bg-summer-sky text-white rounded-[8px] font-sans text-[14px] h-[30px] flex items-center justify-center ${
                 counter === 0
                   ? "after:content-['ADD'] w-[80px] font-bold"
                   : "after:content-[''] w-[38px] text-[30px]"
