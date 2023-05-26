@@ -10,8 +10,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "dark-tangerine": "#f8a818",
-        cinnabar: "#e64d44",
+        "summer-sky": "#3498da",
+        "royal-blue": "#0A2463",
+        "caleston": "#B8D5B8",
       },
       keyframes: {
         pulsing_out: {
