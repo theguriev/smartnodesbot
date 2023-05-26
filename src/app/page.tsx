@@ -1,3 +1,4 @@
+import Script from "next/script";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,13 +13,16 @@ const mockedShopItems = [
 ];
 
 const Home = () => (
-  <div className="flex justify-center">
-    <div className="max-w-[480px] flex flex-wrap content-end">
-      {mockedShopItems.map((shopItem) => (
-        <ListItem key={uuidv4()} {...shopItem} />
-      ))}
+  <>
+    <Script src="https://telegram.org/js/telegram-web-app.js" />
+    <div className="flex justify-center">
+      <div className="max-w-[480px] flex flex-wrap content-end">
+        {mockedShopItems.map((shopItem) => (
+          <ListItem key={uuidv4()} {...shopItem} />
+        ))}
+      </div>
     </div>
-  </div>
+  </>
 );
 
 export default Home;
