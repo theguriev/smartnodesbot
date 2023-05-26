@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import { fadeIn } from "react-animations";
 
 module.exports = {
   content: [
@@ -12,7 +11,7 @@ module.exports = {
       colors: {
         "summer-sky": "#3498da",
         "royal-blue": "#0A2463",
-        "caleston": "#B8D5B8",
+        caleston: "#B8D5B8",
       },
       keyframes: {
         pulsing_out: {
@@ -22,7 +21,7 @@ module.exports = {
         pulsing_in: {
           "0%": { transform: "scale(1)" },
           "100%": { transform: " scale(0.8)" },
-        }
+        },
       },
       animation: {
         pulsing_out: "pulsing_out 0.1s ease-in-out",

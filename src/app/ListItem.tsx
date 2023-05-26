@@ -1,11 +1,16 @@
 "use client";
 import "./ListItemAnimation.css";
-import { useState } from "react";
+import { useState, FC } from "react";
 import Image from "next/image";
-import { shopItemType } from "./mockedData";
-import Transition from "react-transition-group/Transition";
+import Badge from "./Badge";
+import Title from "./Title";
+import ListItemButtons from "./ListItemButtons";
 
-export default function ListItem({ img, title, price }: shopItemType) {
+const ListItem: FC<{ img: string; title: string; price: string }> = ({
+  img,
+  price,
+  title,
+}) => {
   const [counter, setCounter] = useState(0);
   const [pulsingOut, setPulsingOut] = useState(false);
   const [pulsingIn, setPulsingIn] = useState(false);
@@ -36,20 +41,14 @@ export default function ListItem({ img, title, price }: shopItemType) {
   };
 
   return (
-    <div className="relative font-sans w-[120px] h-[159px] pt-[4px] px-[5px] pb-[21px] flex flex-col items-center justify-center">
-      <Transition in={activeCounter} timeout={300} mountOnEnter unmountOnExit>
-        {(state) => (
-          <div
-            className={`counter ${state} flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold bg-summer-sky text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center
-        ${counter > 1 && pulsingOut ? "animate-pulsing_out" : ""}
-        ${counter > 0 && pulsingIn ? "animate-pulsing_in" : ""}
-        `}
-          >
-            {counter}
-          </div>
-        )}
-      </Transition>
-      <div className="h-[78px]">
+    <div className="relative font-sans w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
+      <Badge
+        activeCounter={activeCounter}
+        counter={counter}
+        pulsingIn={pulsingIn}
+        pulsingOut={pulsingOut}
+      />
+      <div>
         <Image
           className="rounded-full"
           src={img}
@@ -58,44 +57,15 @@ export default function ListItem({ img, title, price }: shopItemType) {
           alt="failed to load"
         />
       </div>
-      <div className="text-[13px] flex items-center">
-        <p className="font-normal text-center">{title}</p>
-        <p className="px-[4px]">·</p>
-        <p className="font-bold">{price}</p>
-      </div>
-      <div className="w-[80px] flex justify-between relative">
-        <button
-          onClick={handleRemoveClick}
-          className={`cursor-pointer mt-[10px] bg-royal-blue text-white rounded-[8px] font-sans text-[14px] h-[30px] flex items-center justify-center ${
-            counter === 0 ? "hidden" : "after:content-[''] w-[38px] text-[36px]"
-          }`}
-        >
-          <span
-            className={`${counter === 0 ? "hidden" : "absolute top-[4px]"}`}
-          >
-            -
-          </span>
-        </button>
-
-        <Transition in={activeCounter} timeout={100}>
-          {(state) => (
-            <div
-              onClick={handleAddClick}
-              className={`add_button ${state} cursor-pointer mt-[10px] bg-summer-sky text-white rounded-[8px] font-sans text-[14px] h-[30px] flex items-center justify-center ${
-                counter === 0
-                  ? "after:content-['ADD'] w-[80px] font-bold"
-                  : "after:content-[''] w-[38px] text-[30px]"
-              }`}
-            >
-              <span
-                className={`${counter === 0 ? "hidden" : "absolute top-[8px]"}`}
-              >
-                +
-              </span>
-            </div>
-          )}
-        </Transition>
-      </div>
+      <Title price={price} title={title} />
+      <ListItemButtons
+        onAdd={handleAddClick}
+        onRemove={handleRemoveClick}
+        activeCounter={activeCounter}
+        counter={counter}
+      />
     </div>
   );
-}
+};
+
+export default ListItem;
