@@ -12,42 +12,18 @@ const ListItem: FC<{ img: string; title: string; price: string }> = ({
   title,
 }) => {
   const [counter, setCounter] = useState(0);
-  const [pulsingOut, setPulsingOut] = useState(false);
-  const [pulsingIn, setPulsingIn] = useState(false);
-  const [activeCounter, setActiveCounter] = useState(false);
 
   const handleAddClick = () => {
-    setCounter((prevCounter) => {
-      return prevCounter + 1;
-    });
-    setActiveCounter(true);
-    setPulsingOut(true);
-    setTimeout(() => {
-      setPulsingOut(false);
-    }, 110);
+    setCounter((prevCounter) => prevCounter + 1);
   };
 
   const handleRemoveClick = () => {
-    setCounter((prevCounter) => {
-      return prevCounter - 1;
-    });
-    setPulsingIn(true);
-    setTimeout(() => {
-      setPulsingIn(false);
-    }, 110);
-    if (counter === 1) {
-      setActiveCounter(false);
-    }
+    setCounter((prevCounter) => prevCounter - 1);
   };
 
   return (
     <div className="relative font-sans w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
-      <Badge
-        activeCounter={activeCounter}
-        counter={counter}
-        pulsingIn={pulsingIn}
-        pulsingOut={pulsingOut}
-      />
+      <Badge counter={counter} />
       <div>
         <Image
           className="rounded-full"
@@ -61,7 +37,6 @@ const ListItem: FC<{ img: string; title: string; price: string }> = ({
       <ListItemButtons
         onAdd={handleAddClick}
         onRemove={handleRemoveClick}
-        activeCounter={activeCounter}
         counter={counter}
       />
     </div>

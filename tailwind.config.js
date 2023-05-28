@@ -14,18 +14,74 @@ module.exports = {
         caleston: "#B8D5B8",
       },
       keyframes: {
-        pulsing_out: {
-          "0%": { transform: "scale(1)" },
-          "100%": { transform: " scale(1.2)" },
+        badgeShow: {
+          "0%": {
+            transform: "scale3d(0.5, 0.5, 1)",
+            opacity: 0,
+            visibility: "hidden",
+          },
+          "30%": {
+            transform: "scale3d(1.2, 1.2, 1)",
+          },
+          "100%": {
+            transform: "scale3d(1, 1, 1)",
+            opacity: 1,
+            visibility: "visible",
+          },
         },
-        pulsing_in: {
-          "0%": { transform: "scale(1)" },
-          "100%": { transform: " scale(0.8)" },
+        badgeHide: {
+          from: {
+            transform: "scale3d(1, 1, 1)",
+            opacity: 1,
+            visibility: "visible",
+          },
+
+          to: {
+            transform: "scale3d(0.5, 0.5, 1)",
+            opacity: 0,
+            visibility: "hidden",
+          },
+        },
+        badgeIncrement: {
+          "from, to": {
+            transform: "scale3d(1, 1, 1)",
+          },
+          "40%": {
+            transform: "scale3d(1.2, 1.2, 1)",
+          },
+        },
+        badgeIncrementSame: {
+          "from, to": {
+            transform: "scale3d(1, 1, 1)",
+          },
+          "40%": {
+            transform: "scale3d(1.2, 1.2, 1)",
+          },
+        },
+        badgeDecrement: {
+          "from, to": {
+            transform: "scale3d(1, 1, 1)",
+          },
+          "40%": {
+            transform: "scale3d(0.8, 0.8, 1)",
+          },
+        },
+        badgeDecrementSame: {
+          "from, to": {
+            transform: "scale3d(1, 1, 1)",
+          },
+          "40%": {
+            transform: "scale3d(0.8, 0.8, 1)",
+          },
         },
       },
       animation: {
-        pulsing_out: "pulsing_out 0.1s ease-in-out",
-        pulsing_in: "pulsing_in 0.1s ease-in-out",
+        badgeShow: "badgeShow .15s ease both",
+        badgeHide: "badgeHide .15s ease both",
+        badgeIncrement: "badgeIncrement .15s ease both",
+        badgeIncrementSame: "badgeIncrementSame .15s ease both",
+        badgeDecrement: "badgeDecrement .15s ease both",
+        badgeDecrementSame: "badgeDecrementSame .15s ease both",
       },
     },
   },

@@ -6,9 +6,8 @@ import classNames from "classnames";
 const ListItemButtons: FC<{
   onRemove?: MouseEventHandler<HTMLButtonElement>;
   onAdd?: MouseEventHandler<HTMLButtonElement>;
-  activeCounter: boolean;
   counter: number;
-}> = ({ onAdd, onRemove, activeCounter, counter }) => (
+}> = ({ onAdd, onRemove, counter }) => (
   <div className="w-[80px] h-[30px] flex justify-between relative">
     <Button
       variant="secondary"
@@ -21,7 +20,7 @@ const ListItemButtons: FC<{
       <span className="mt-[-4px]">-</span>
     </Button>
 
-    <Transition in={activeCounter} timeout={100}>
+    <Transition in={counter > 0} timeout={100}>
       {(state) => (
         <Button
           onClick={onAdd}
