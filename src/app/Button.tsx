@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { FC, MouseEventHandler, PropsWithChildren } from "react";
 
 const variantDictionary = {
@@ -16,9 +17,11 @@ const Button: FC<
   return (
     <button
       onClick={onClick}
-      className={`cursor-pointer text-white px-3 py-1 rounded-md ${className} ${
-        variantDictionary[variant || ""]
-      }`}
+      className={classNames(
+        className,
+        variantDictionary[variant || ""],
+        "cursor-pointer text-white px-3 py-1 rounded-md"
+      )}
     >
       {children}
     </button>
