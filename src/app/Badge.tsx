@@ -39,10 +39,6 @@ const Badge: FC<{
   const prevCounterRef = useRef(counter);
   const [animation, setAnimation] = useState<Animations>();
   useEffect(() => {
-    console.log(
-      "log:",
-      getAnimationName(prevCounterRef.current, counter, animation)
-    );
     setAnimation(getAnimationName(prevCounterRef.current, counter, animation));
     prevCounterRef.current = counter;
     // eslint-disable-next-line react-hooks/exhaustive-deps
