@@ -16,10 +16,12 @@ const Home = () => (
   <>
     <Script src="https://telegram.org/js/telegram-web-app.js" />
     <div className="flex justify-center">
-      <div className="max-w-[480px] flex flex-wrap content-end">
-        {mockedShopItems.map((shopItem) => (
-          <ListItem key={uuidv4()} {...shopItem} />
-        ))}
+      <div className="max-w-[360px] flex justify-center">
+        <div className="flex flex-wrap justify-start">
+          {mockedShopItems.map((shopItem) => (
+            <ListItem key={uuidv4()} {...shopItem} />
+          ))}
+        </div>
       </div>
     </div>
   </>
