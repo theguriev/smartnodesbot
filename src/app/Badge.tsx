@@ -43,11 +43,21 @@ const Badge: FC<{
     prevCounterRef.current = counter;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter]);
+
+  const theme = window?.Telegram?.WebApp?.colorScheme;
+  const badgeColor = () => {
+    if (theme === "light") {
+      return "bg-smart";
+    }
+    return "bg-kind";
+  };
+
   return (
     <div
       className={classNames(
         animation,
-        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold bg-el-senor text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+        badgeColor(),
+        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
       )}
     >
       {counter === 0 ? 1 : counter}
