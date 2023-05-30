@@ -1,6 +1,10 @@
 import { FC } from "react";
 
-const themeParams = window?.Telegram?.WebApp?.themeParams || {};
+const themeParams = typeof window !== "undefined" ? window?.Telegram?.WebApp?.themeParams : {};
+
+if (window === undefined) {
+
+}
 
 const Title: FC<{ title: string; price: string }> = ({ title, price }) => (
   <div className="text-[13px] flex items-center gap-1">
