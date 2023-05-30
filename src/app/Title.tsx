@@ -11,13 +11,13 @@ const Title: FC<{ title: string; price: string }> = ({ title, price }) => {
       if (color && color === "#ffffff") {
         setTextColor("text-white");
       }
-      else setTextColor("text-amber-700");
+      else setTextColor("text-black");
     }
   }, []);
 
   return (
-    <div className="text-[13px] flex items-center gap-1`">
-      <span className={textColor}>{title}</span>
+    <div className={`${textColor} text-[13px] flex items-center gap-1`}>
+      <span>{title}</span>
       <span>·</span>
       <span>{price}</span>
     </div>
