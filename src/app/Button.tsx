@@ -2,8 +2,8 @@ import classNames from "classnames";
 import { FC, MouseEventHandler, PropsWithChildren } from "react";
 
 const variantDictionary = {
-  primary: "bg-summer-sky",
-  secondary: "bg-royal-blue",
+  primary: "bg-el-senor",
+  secondary: "bg-el-patron",
   "": undefined,
 };
 

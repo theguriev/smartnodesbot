@@ -47,7 +47,7 @@ const Badge: FC<{
     <div
       className={classNames(
         animation,
-        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold bg-summer-sky text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold bg-el-senor text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
       )}
     >
       {counter === 0 ? 1 : counter}

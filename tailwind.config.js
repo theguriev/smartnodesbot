@@ -9,9 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "summer-sky": "#3498da",
-        "royal-blue": "#0A2463",
-        caleston: "#B8D5B8",
+        "el-senor": "#3498da",
+        "el-patron": "#0A2463",
       },
       keyframes: {
         badgeShow: {
