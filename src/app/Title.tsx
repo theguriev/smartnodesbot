@@ -8,9 +8,10 @@ const Title: FC<{ title: string; price: string }> = ({ title, price }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const color = window?.Telegram?.WebApp?.themeParams?.text_color;
-      if (color) {
-        setTextColor(`text-[${color}]`);
+      if (color && color === "#ffffff") {
+        setTextColor("text-white");
       }
+      else setTextColor("text-amber-700");
     }
   }, []);
 
