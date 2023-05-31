@@ -56,6 +56,7 @@ const List = () => {
 
   window?.Telegram?.WebApp?.MainButton.onClick(() => {
     <Link href="/cart" />;
+    console.log("new click")
   });
 
   return (
