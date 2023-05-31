@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,10 +14,24 @@ const mockedShopItems = [
 ];
 
 const List = () => {
+  interface CartItem {
+    img: string;
+    title: string;
+    price: string;
+    id: string;
+  }
+
+  const [addedItems, setAddedItems] = useState<CartItem[]>([]);
+
+  const addToCart = (product: CartItem) => {
+    let newItems: CartItem[] = [...addedItems, product];
+    setAddedItems(newItems);
+  };
+  console.log(addedItems);
   return (
     <div className="flex flex-wrap justify-start">
       {mockedShopItems.map((shopItem) => (
-        <ListItem key={shopItem.id} {...shopItem} />
+        <ListItem key={shopItem.id} {...shopItem} addToCart={addToCart} />
       ))}
     </div>
   );

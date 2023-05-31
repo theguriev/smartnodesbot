@@ -1,20 +1,28 @@
 "use client";
 import "./ListItemAnimation.css";
-import { useState, FC } from "react";
+import { useState, FC, MouseEventHandler } from "react";
 import Image from "next/image";
 import Badge from "./Badge";
 import Title from "./Title";
 import ListItemButtons from "./ListItemButtons";
 
-const ListItem: FC<{ img: string; title: string; price: string }> = ({
-  img,
-  price,
-  title,
-}) => {
+const ListItem: FC<{
+  img: string;
+  title: string;
+  price: string;
+  id: string;
+  addToCart: (product: {
+    img: string;
+    title: string;
+    price: string;
+    id: string;
+  }) => void;
+}> = ({ img, title, price, id, addToCart }) => {
   const [counter, setCounter] = useState(0);
 
-  const handleAddClick = () => {
+  const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     setCounter((prevCounter) => prevCounter + 1);
+    addToCart({ img, title, price, id });
   };
 
   const handleRemoveClick = () => {
