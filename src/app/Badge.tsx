@@ -33,19 +33,10 @@ const getAnimationName = (
   }
 };
 
-const badgeColor = () => {
-  if (
-    typeof window !== "undefined" &&
-    window?.Telegram?.WebApp?.colorScheme === "light"
-  ) {
-    return "bg-smart";
-  }
-  return "bg-funny";
-};
-
 const Badge: FC<{
   counter: number;
 }> = ({ counter }) => {
+  const { colorScheme } = window?.Telegram?.WebApp;
   const prevCounterRef = useRef(counter);
   const [animation, setAnimation] = useState<Animations>();
   useEffect(() => {
@@ -58,7 +49,7 @@ const Badge: FC<{
     <div
       className={classNames(
         animation,
-        badgeColor(),
+        colorScheme === "light" ? "bg-smart" : "bg-funny",
         "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
       )}
     >
