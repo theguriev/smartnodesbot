@@ -36,6 +36,7 @@ const getAnimationName = (
 const Badge: FC<{
   counter: number;
 }> = ({ counter }) => {
+  const { colorScheme } = window?.Telegram?.WebApp;
   const prevCounterRef = useRef(counter);
   const [animation, setAnimation] = useState<Animations>();
   useEffect(() => {
@@ -43,11 +44,13 @@ const Badge: FC<{
     prevCounterRef.current = counter;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter]);
+
   return (
     <div
       className={classNames(
         animation,
-        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold bg-summer-sky text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+        colorScheme === "light" ? "bg-smart" : "bg-funny",
+        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
       )}
     >
       {counter === 0 ? 1 : counter}

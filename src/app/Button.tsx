@@ -1,11 +1,5 @@
 import classNames from "classnames";
-import { FC, MouseEventHandler, PropsWithChildren } from "react";
-
-const variantDictionary = {
-  primary: "bg-summer-sky",
-  secondary: "bg-royal-blue",
-  "": undefined,
-};
+import { FC, MouseEventHandler, PropsWithChildren, useState } from "react";
 
 const Button: FC<
   PropsWithChildren<{
@@ -14,6 +8,13 @@ const Button: FC<
     variant?: "primary" | "secondary";
   }>
 > = ({ className, onClick, children, variant }) => {
+  const theme = window?.Telegram?.WebApp?.colorScheme;
+
+  const variantDictionary = {
+    primary: theme === "light" ? "bg-smart" : "bg-funny",
+    secondary: theme === "light" ? "bg-kind" : "bg-lucky",
+    "": undefined,
+  };
   return (
     <button
       onClick={onClick}
