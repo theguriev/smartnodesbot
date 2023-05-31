@@ -27,11 +27,29 @@ const List = () => {
     let newItems: CartItem[] = [...addedItems, product];
     setAddedItems(newItems);
   };
+  
+  const removeFromCart = (product: CartItem) => {
+    const indexToRemove = addedItems.findIndex(
+      (item) => item.id === product.id
+    );
+    if (indexToRemove !== -1) {
+      const newItems = [...addedItems];
+      newItems.splice(indexToRemove, 1);
+      setAddedItems(newItems);
+    }
+  };
+
   console.log(addedItems);
+
   return (
     <div className="flex flex-wrap justify-start">
       {mockedShopItems.map((shopItem) => (
-        <ListItem key={shopItem.id} {...shopItem} addToCart={addToCart} />
+        <ListItem
+          key={shopItem.id}
+          {...shopItem}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+        />
       ))}
     </div>
   );

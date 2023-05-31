@@ -17,7 +17,13 @@ const ListItem: FC<{
     price: string;
     id: string;
   }) => void;
-}> = ({ img, title, price, id, addToCart }) => {
+  removeFromCart: (product: {
+    img: string;
+    title: string;
+    price: string;
+    id: string;
+  }) => void;
+}> = ({ img, title, price, id, addToCart, removeFromCart }) => {
   const [counter, setCounter] = useState(0);
 
   const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -27,6 +33,7 @@ const ListItem: FC<{
 
   const handleRemoveClick = () => {
     setCounter((prevCounter) => prevCounter - 1);
+    removeFromCart({ img, title, price, id });
   };
 
   return (
