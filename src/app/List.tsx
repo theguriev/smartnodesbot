@@ -56,7 +56,7 @@ const List = () => {
   };
   
   const router = useRouter();
-  window?.Telegram?.WebApp?.MainButton.onClick(() => router.push("/about"));
+  window?.Telegram?.WebApp?.MainButton.onClick(() => router.push("/cart"));
 
   return (
     <div className="flex flex-wrap justify-start">
