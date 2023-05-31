@@ -33,6 +33,14 @@ const getAnimationName = (
   }
 };
 
+const theme = window?.Telegram?.WebApp?.colorScheme;
+const badgeColor = () => {
+  if (theme === "light") {
+    return "bg-smart";
+  }
+  return "bg-kind";
+};
+
 const Badge: FC<{
   counter: number;
 }> = ({ counter }) => {
@@ -43,14 +51,6 @@ const Badge: FC<{
     prevCounterRef.current = counter;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter]);
-
-  const theme = window?.Telegram?.WebApp?.colorScheme;
-  const badgeColor = () => {
-    if (theme === "light") {
-      return "bg-smart";
-    }
-    return "bg-kind";
-  };
 
   return (
     <div
