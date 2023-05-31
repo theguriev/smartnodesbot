@@ -2,6 +2,7 @@
 import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/navigation";
 
 
 const mockedShopItems = [
@@ -53,6 +54,9 @@ const List = () => {
       showMainButton(newItems);
     }
   };
+  
+  const router = useRouter();
+  window?.Telegram?.WebApp?.MainButton.onClick(() => router.push("/cart"));
 
   return (
     <div className="flex flex-wrap justify-start">
