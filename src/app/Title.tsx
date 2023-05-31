@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 
 const Title: FC<{ title: string; price: string }> = ({ title, price }) => {
   return (

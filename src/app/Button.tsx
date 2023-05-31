@@ -12,7 +12,7 @@ const Button: FC<
 
   const variantDictionary = {
     primary: theme === "light" ? "bg-smart" : "bg-funny",
-    secondary: theme !== "light" ? "bg-kind" : "bg-lucky",
+    secondary: theme === "light" ? "bg-kind" : "bg-lucky",
     "": undefined,
   };
   return (
