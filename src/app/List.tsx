@@ -2,6 +2,7 @@
 import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
+import Link from "next/link";
 
 const mockedShopItems = [
   { img: "/lava.webp", title: "Lava", price: "240$", id: uuidv4() },
@@ -53,10 +54,9 @@ const List = () => {
     }
   };
 
-  const MainButtonClick = window?.Telegram?.WebApp?.MainButton.onClick(() => {
-    console.log("clicked")
+  window?.Telegram?.WebApp?.MainButton.onClick(() => {
+    <Link href="/cart" />;
   });
-
 
   return (
     <div className="flex flex-wrap justify-start">
