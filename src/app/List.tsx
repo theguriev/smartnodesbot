@@ -2,7 +2,8 @@
 import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 const mockedShopItems = [
   { img: "/lava.webp", title: "Lava", price: "240$", id: uuidv4() },
@@ -53,11 +54,9 @@ const List = () => {
       showMainButton(newItems);
     }
   };
-
-  window?.Telegram?.WebApp?.MainButton.onClick(() => {
-    <Link href="/cart" />;
-    console.log("new click")
-  });
+  
+  const router = useRouter();
+  window?.Telegram?.WebApp?.MainButton.onClick(() => router.push("/about"));
 
   return (
     <div className="flex flex-wrap justify-start">
