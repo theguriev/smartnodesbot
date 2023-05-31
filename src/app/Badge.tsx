@@ -33,7 +33,7 @@ const getAnimationName = (
   }
 };
 
-const theme = window?.Telegram?.WebApp?.colorScheme;
+const theme = typeof window !== 'undefined' && window?.Telegram?.WebApp?.colorScheme;
 const badgeColor = () => {
   if (theme === "light") {
     return "bg-smart";
