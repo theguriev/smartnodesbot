@@ -22,12 +22,26 @@ const List = () => {
   }
 
   const [addedItems, setAddedItems] = useState<CartItem[]>([]);
+  const MainButton = window?.Telegram?.WebApp?.MainButton;
+  const showMainButton = (items: Array<CartItem>) => {
+    if (items.length === 0) {
+      MainButton.hide();
+    } else {
+      MainButton.show();
+      MainButton.setParams({
+        text: "BUY",
+        color: "#33b445",
+      });
+    }
+    console.log(MainButton);
+  };
 
   const addToCart = (product: CartItem) => {
     let newItems: CartItem[] = [...addedItems, product];
     setAddedItems(newItems);
+    showMainButton(newItems);
   };
-  
+
   const removeFromCart = (product: CartItem) => {
     const indexToRemove = addedItems.findIndex(
       (item) => item.id === product.id
@@ -36,10 +50,9 @@ const List = () => {
       const newItems = [...addedItems];
       newItems.splice(indexToRemove, 1);
       setAddedItems(newItems);
+      showMainButton(newItems);
     }
   };
-
-  console.log(addedItems);
 
   return (
     <div className="flex flex-wrap justify-start">
