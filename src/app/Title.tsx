@@ -1,5 +1,3 @@
-"use client";
-
 import { FC } from "react";
 
 const Title: FC<{ title: string; price: string }> = ({ title, price }) => {

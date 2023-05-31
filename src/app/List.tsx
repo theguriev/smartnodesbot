@@ -33,7 +33,6 @@ const List = () => {
         color: "#33b445",
       });
     }
-    console.log(MainButton);
   };
 
   const addToCart = (product: CartItem) => {
@@ -53,6 +52,11 @@ const List = () => {
       showMainButton(newItems);
     }
   };
+
+  const MainButtonClick = window?.Telegram?.WebApp?.MainButton.onClick(() => {
+    console.log("clicked")
+  });
+
 
   return (
     <div className="flex flex-wrap justify-start">
