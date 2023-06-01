@@ -3,6 +3,7 @@ import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
+import Script from "next/script";
 
 const mockedShopItems = [
   { img: "/lava.webp", title: "Lava", price: "240$", id: uuidv4() },
@@ -15,6 +16,11 @@ const mockedShopItems = [
 ];
 
 const List = () => {
+  console.log(window.Telegram);
+  const [ready, setReady] = useState(false);
+  const handleReady = () => {
+    setReady(true);
+  };
   interface CartItem {
     img: string;
     title: string;
@@ -58,16 +64,24 @@ const List = () => {
   window?.Telegram?.WebApp?.MainButton.onClick(() => router.push("/cart"));
 
   return (
-    <div className="flex flex-wrap justify-start">
-      {mockedShopItems.map((shopItem) => (
-        <ListItem
-          key={shopItem.id}
-          {...shopItem}
-          addToCart={addToCart}
-          removeFromCart={removeFromCart}
-        />
-      ))}
-    </div>
+    <>
+      <Script
+        src="https://telegram.org/js/telegram-web-app.js"
+        onReady={handleReady}
+      />
+      {ready && (
+        <div className="flex flex-wrap justify-start">
+          {mockedShopItems.map((shopItem) => (
+            <ListItem
+              key={shopItem.id}
+              {...shopItem}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+            />
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 
