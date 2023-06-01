@@ -4,7 +4,6 @@ import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 
-
 const mockedShopItems = [
   { img: "/lava.webp", title: "Lava", price: "240$", id: uuidv4() },
   { img: "/defund.webp", title: "DeFund", price: "230$", id: uuidv4() },
@@ -29,11 +28,11 @@ const List = () => {
     if (items.length === 0) {
       MainButton.hide();
     } else {
-      MainButton.show();
       MainButton.setParams({
         text: "BUY",
         color: "#33b445",
       });
+      MainButton.show();
     }
   };
 
@@ -54,7 +53,7 @@ const List = () => {
       showMainButton(newItems);
     }
   };
-  
+
   const router = useRouter();
   window?.Telegram?.WebApp?.MainButton.onClick(() => router.push("/cart"));
 
