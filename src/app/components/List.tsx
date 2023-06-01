@@ -3,8 +3,8 @@ import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import { CartItem } from "./types";
-// import useTelegram  from "./useTelegram";
+import { CartItem } from "../types";
+import { useTelegram } from "../hooks/useTelegram";
 
 const mockedShopItems = [
   { img: "/lava.webp", title: "Lava", price: "240", id: uuidv4() },
@@ -17,8 +17,10 @@ const mockedShopItems = [
 ];
 
 const List = () => {
+  const {
+    WebApp: { MainButton, BackButton },
+  } = useTelegram();
   const [addedItems, setAddedItems] = useState<CartItem[]>([]);
-  const MainButton = window.Telegram.WebApp.MainButton;
   const showMainButton = (items: Array<CartItem>) => {
     if (items.length === 0) {
       MainButton.hide();
@@ -31,7 +33,7 @@ const List = () => {
     }
   };
 
-  window.Telegram.WebApp.BackButton.hide();
+  BackButton.hide();
 
   const addToCart = (product: CartItem) => {
     let newItems: CartItem[] = [...addedItems, product];
@@ -52,7 +54,7 @@ const List = () => {
   };
 
   const router = useRouter();
-  window.Telegram.WebApp.MainButton.onClick(() => router.push("/cart"));
+  MainButton.onClick(() => router.push("/cart"));
   return (
     <>
       <div className="flex flex-wrap justify-start">
