@@ -1,18 +1,19 @@
 "use client";
+import Script from "next/script";
 import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
-import Script from "next/script";
+import { useTelegram } from "../useTelegram";
 
 const Cart: FC = () => {
   const [ready, setReady] = useState(false);
   const handleReady = () => {
     setReady(true);
   };
-
-  window?.Telegram?.WebApp?.BackButton.show();
+  const { tg } = useTelegram();
+  tg?.BackButton.show();
 
   const router = useRouter();
-  window?.Telegram?.WebApp?.BackButton.onClick(() => router.back());
+  tg?.BackButton.onClick(() => router.back());
   console.log(window.Telegram);
   return (
     <>
@@ -20,9 +21,8 @@ const Cart: FC = () => {
         src="https://telegram.org/js/telegram-web-app.js"
         onReady={handleReady}
       />
-      {ready && <div className="flex justify-center">Cart</div>}
+      {ready && <div className="flex justify-center">CART</div>}
     </>
   );
 };
-
 export default Cart;
