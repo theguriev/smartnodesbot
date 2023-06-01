@@ -1,6 +1,6 @@
 "use client";
 import Script from "next/script";
-import { useRouter } from "next/router";
+import { usePathname } from 'next/navigation';
 import { useState } from "react";
 import List from "./List";
 import Cart from "./cart/page";
@@ -11,8 +11,8 @@ const Home = () => {
     setReady(true);
   };
 
-  const router = useRouter();
-  const { pathname } = router;
+  const pathname = usePathname();
+
 
   return (
     <>
