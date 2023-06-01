@@ -34,7 +34,6 @@ import Cart from "./cart/page";
 
 const Home = () => {
   const pathname = usePathname();
-  console.log();
   return (
     <>
       <div className="flex justify-center">
