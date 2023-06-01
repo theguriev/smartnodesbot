@@ -1,6 +1,11 @@
+const tg = window.Telegram.WebApp;
+
 export const useTelegram = () => {
-  if (typeof window !== "undefined") {
-    let tg;
-    return (tg = window?.Telegram?.WebApp);
-  }
+  const MainButton = tg.MainButton;
+  const BackButton = tg.BackButton;
+  return {
+    tg,
+    MainButton,
+    BackButton,
+  };
 };

@@ -4,7 +4,7 @@ import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import { useTelegram } from "./useTelegram";
+// import useTelegram  from "./useTelegram";
 
 const mockedShopItems = [
   { img: "/lava.webp", title: "Lava", price: "240$", id: uuidv4() },
@@ -21,7 +21,7 @@ const List = () => {
   const handleReady = () => {
     setReady(true);
   };
-  const tg = useTelegram();
+
   interface CartItem {
     img: string;
     title: string;
@@ -30,16 +30,16 @@ const List = () => {
   }
 
   const [addedItems, setAddedItems] = useState<CartItem[]>([]);
-  const MainButton = tg?.MainButton;
+  const MainButton = window.Telegram.WebApp.MainButton;
   const showMainButton = (items: Array<CartItem>) => {
     if (items.length === 0) {
-      MainButton?.hide();
+      MainButton.hide();
     } else {
-      MainButton?.setParams({
+      MainButton.setParams({
         text: "BUY",
         color: "#33b445",
       });
-      MainButton?.show();
+      MainButton.show();
     }
   };
 
@@ -62,27 +62,10 @@ const List = () => {
   };
 
   const router = useRouter();
-  tg?.MainButton.onClick(() => router.push("/cart"));
-
-  // return (
-  //   <div className="flex flex-wrap justify-start">
-  //     {mockedShopItems.map((shopItem) => (
-  //       <ListItem
-  //         key={shopItem.id}
-  //         {...shopItem}
-  //         addToCart={addToCart}
-  //         removeFromCart={removeFromCart}
-  //       />
-  //     ))}
-  //   </div>
-  // );
+  window.Telegram.WebApp.MainButton.onClick(() => router.push("/cart"));
   return (
     <>
-      <Script
-        src="https://telegram.org/js/telegram-web-app.js"
-        onReady={handleReady}
-      />
-      {ready && (
+
         <div className="flex flex-wrap justify-start">
           {mockedShopItems.map((shopItem) => (
             <ListItem
@@ -93,7 +76,7 @@ const List = () => {
             />
           ))}
         </div>
-      )}
+
     </>
   );
 };
