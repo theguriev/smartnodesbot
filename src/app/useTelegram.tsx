@@ -1,12 +1,6 @@
 export const useTelegram = () => {
+  if (typeof window !== "undefined") {
     let tg;
-  
-    if (typeof window !== "undefined") {
-      tg = window?.Telegram?.WebApp;
-    }
-  
-    return {
-      tg,
-    };
-  };
-  
+    return (tg = window?.Telegram?.WebApp);
+  }
+};

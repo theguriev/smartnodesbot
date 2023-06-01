@@ -9,7 +9,7 @@ const Cart: FC = () => {
   const handleReady = () => {
     setReady(true);
   };
-  const { tg } = useTelegram();
+  const  tg  = useTelegram();
   tg?.BackButton.show();
 
   const router = useRouter();

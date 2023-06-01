@@ -21,7 +21,7 @@ const List = () => {
   const handleReady = () => {
     setReady(true);
   };
-  const { tg } = useTelegram();
+  const tg = useTelegram();
   interface CartItem {
     img: string;
     title: string;
