@@ -10,12 +10,16 @@ const Cart: FC = () => {
   const MainButton = window.Telegram.WebApp.MainButton;
   MainButton.setParams({
     text: `PAY ${total} $`,
-    color: "#33b445",
   });
 
   window.Telegram.WebApp.BackButton.show();
   const router = useRouter();
-  window.Telegram.WebApp.BackButton.onClick(() => router.back());
+  window.Telegram.WebApp.BackButton.onClick(() => {
+    MainButton.setParams({
+      text: "BUY",
+    });
+    router.back();
+  });
   return <div className="flex justify-center">CART</div>;
 };
 export default Cart;
