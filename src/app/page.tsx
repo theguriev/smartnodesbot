@@ -1,13 +1,18 @@
 "use client";
 import Script from "next/script";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import List from "./List";
+import Cart from "./cart/page";
 
 const Home = () => {
   const [ready, setReady] = useState(false);
   const handleReady = () => {
     setReady(true);
   };
+
+  const router = useRouter();
+  const { pathname } = router;
 
   return (
     <>
@@ -18,7 +23,7 @@ const Home = () => {
       {ready && (
         <div className="flex justify-center">
           <div className="max-w-[360px] flex justify-center">
-            <List />
+            {pathname === "/" ? <List /> : <Cart />}
           </div>
         </div>
       )}
