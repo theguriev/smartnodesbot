@@ -3,7 +3,7 @@ import { useState } from "react";
 import ListItem from "./ListItem";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import { CartItem } from "../types";
+import { CartItemType } from "../types";
 import { useTelegram } from "../hooks/useTelegram";
 
 const mockedShopItems = [
@@ -20,8 +20,8 @@ const List = () => {
   const {
     WebApp: { MainButton, BackButton },
   } = useTelegram();
-  const [addedItems, setAddedItems] = useState<CartItem[]>([]);
-  const showMainButton = (items: Array<CartItem>) => {
+  const [addedItems, setAddedItems] = useState<CartItemType[]>([]);
+  const showMainButton = (items: Array<CartItemType>) => {
     if (items.length === 0) {
       MainButton.hide();
     } else {
@@ -35,13 +35,13 @@ const List = () => {
 
   BackButton.hide();
 
-  const addToCart = (product: CartItem) => {
-    let newItems: CartItem[] = [...addedItems, product];
+  const onAdd = (product: CartItemType) => {
+    let newItems: CartItemType[] = [...addedItems, product];
     setAddedItems(newItems);
     showMainButton(newItems);
   };
 
-  const removeFromCart = (product: CartItem) => {
+  const onRemove = (product: CartItemType) => {
     const indexToRemove = addedItems.findIndex(
       (item) => item.id === product.id
     );
@@ -62,8 +62,8 @@ const List = () => {
           <ListItem
             key={shopItem.id}
             {...shopItem}
-            addToCart={addToCart}
-            removeFromCart={removeFromCart}
+            onAdd={onAdd}
+            onRemove={onRemove}
           />
         ))}
       </div>

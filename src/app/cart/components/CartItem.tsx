@@ -1,7 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 import { FC } from "react";
 import { useTelegram } from "../../hooks/useTelegram";
+import { CountedCartItemType } from "@/app/types";
 
-const CartItem: FC = () => {
+const CartItem: FC<CountedCartItemType> = ({
+  img,
+  title,
+  amount,
+  totalPrice,
+}) => {
   const {
     WebApp: { themeParams },
   } = useTelegram();
@@ -10,7 +17,7 @@ const CartItem: FC = () => {
       className="flex flex-row px-6 py-2 text-sm"
       style={{ backgroundColor: themeParams?.bg_color }}
     >
-      <img src="/lava.webp" className="w-10 h-10 mr-3"/>
+      <img src={img} className="w-10 h-10 mr-3" alt="can't load" />
       <div className="w-full flex justify-between">
         <div className="flex flex-col">
           <div className="font-bold flex gap-1">
@@ -19,17 +26,17 @@ const CartItem: FC = () => {
                 color: themeParams?.text_color,
               }}
             >
-              Cookie
+              {title}
             </span>
-            <span className="text-smart">3x</span>
+            <span className="text-smart">{amount}x</span>
           </div>
-          <span style={{ color: themeParams?.hint_color }}>Milks favorite</span>
+          <span style={{ color: themeParams?.hint_color }}>description</span>
         </div>
         <span
           className="font-semibold"
           style={{ color: themeParams?.text_color }}
         >
-          11.97$
+          {totalPrice}$
         </span>
       </div>
     </div>

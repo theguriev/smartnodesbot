@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTelegram } from "../hooks/useTelegram";
 import { v4 as uuidv4 } from "uuid";
 import CartItem from "./components/CartItem";
+import { CountedCartItemType } from "../types";
 
 const mockedCartItems = [
   { img: "/lava.webp", title: "Lava", price: "240", id: uuidv4() },
@@ -15,6 +16,17 @@ const mockedCartItems = [
   { img: "/chainflip.webp", title: "Chainflip", price: "240", id: uuidv4() },
 ];
 
+const totalCartItems: CountedCartItemType[] = mockedCartItems.reduce<CountedCartItemType[]>((acc, item) => {
+    const existingItem = acc.find((cartItem) => cartItem.title === item.title);
+    if (existingItem) {
+      existingItem.amount++;
+      existingItem.totalPrice = existingItem.amount * parseFloat(existingItem.price);
+    } else {
+      acc.push({ ...item, amount: 1, totalPrice: parseFloat(item.price) });
+    }
+    return acc;
+  }, []);
+
 const Cart: FC = () => {
   const {
     WebApp: { MainButton, BackButton, themeParams },
@@ -22,7 +34,7 @@ const Cart: FC = () => {
   const [total, setTotal] = useState(250);
 
   MainButton.setParams({
-    text: `PAY ${total} $`,
+    text: `PAY ${total}$`,
   });
 
   BackButton.show();
@@ -33,6 +45,12 @@ const Cart: FC = () => {
     });
     router.back();
   });
+
+  const handleEdit = () => {
+    MainButton.setParams({
+      text: "VIEW ORDER",
+    });
+  };
   return (
     <div
       className="flex flex-col font-sans h-screen"
@@ -48,10 +66,14 @@ const Cart: FC = () => {
           YOUR ORDER
         </span>
         <span className=" text-active">
-          <Link href="/">Edit</Link>
+          <Link href="/" onClick={handleEdit}>
+            Edit
+          </Link>
         </span>
       </div>
-      <CartItem />
+      {totalCartItems.map((cartItem) => (
+        <CartItem key={cartItem.id} {...cartItem} />
+      ))}
       <div className=" pt-3 flex flex-col h-full">
         <input
           className="px-6 py-3 text-base focus:outline-none"
