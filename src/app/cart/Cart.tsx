@@ -84,7 +84,7 @@ const Cart: FC = () => {
         <input
           className="px-6 py-3 text-base focus:outline-none"
           placeholder="Add comment..."
-          style={{ color: themeParams?.text_color }}
+          style={{ color: themeParams?.text_color, backgroundColor: themeParams?.bg_color }}
         />
         <span
           className="px-6 pt-3 pb-6 text-sm"
