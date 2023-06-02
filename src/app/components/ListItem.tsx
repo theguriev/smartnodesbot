@@ -5,25 +5,14 @@ import Image from "next/image";
 import Badge from "./Badge";
 import Title from "./Title";
 import ListItemButtons from "./ListItemButtons";
+import { CartItem } from "../types";
 
-const ListItem: FC<{
-  img: string;
-  title: string;
-  price: string;
-  id: string;
-  addToCart: (product: {
-    img: string;
-    title: string;
-    price: string;
-    id: string;
-  }) => void;
-  removeFromCart: (product: {
-    img: string;
-    title: string;
-    price: string;
-    id: string;
-  }) => void;
-}> = ({ img, title, price, id, addToCart, removeFromCart }) => {
+const ListItem: FC<
+  CartItem & {
+    addToCart: (product: CartItem) => void;
+    removeFromCart: (product: CartItem) => void;
+  }
+> = ({ img, title, price, id, addToCart, removeFromCart }) => {
   const [counter, setCounter] = useState(0);
 
   const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {

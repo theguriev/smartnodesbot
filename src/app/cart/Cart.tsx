@@ -1,20 +1,21 @@
 "use client";
 import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CartItem } from "../types";
-// import useTelegram from "../useTelegram";
+import { useTelegram } from "../hooks/useTelegram";
 
 const Cart: FC = () => {
+  const {
+    WebApp: { MainButton, BackButton },
+  } = useTelegram();
   const [total, setTotal] = useState(250);
 
-  const MainButton = window.Telegram.WebApp.MainButton;
   MainButton.setParams({
     text: `PAY ${total} $`,
   });
 
-  window.Telegram.WebApp.BackButton.show();
+  BackButton.show();
   const router = useRouter();
-  window.Telegram.WebApp.BackButton.onClick(() => {
+  BackButton.onClick(() => {
     MainButton.setParams({
       text: "BUY",
     });
