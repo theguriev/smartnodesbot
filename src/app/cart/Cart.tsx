@@ -16,25 +16,31 @@ const mockedCartItems = [
   { img: "/chainflip.webp", title: "Chainflip", price: "240", id: uuidv4() },
 ];
 
-const totalCartItems: CountedCartItemType[] = mockedCartItems.reduce<CountedCartItemType[]>((acc, item) => {
-    const existingItem = acc.find((cartItem) => cartItem.title === item.title);
-    if (existingItem) {
-      existingItem.amount++;
-      existingItem.totalPrice = existingItem.amount * parseFloat(existingItem.price);
-    } else {
-      acc.push({ ...item, amount: 1, totalPrice: parseFloat(item.price) });
-    }
-    return acc;
-  }, []);
+const totalCartItems: CountedCartItemType[] = mockedCartItems.reduce<
+  CountedCartItemType[]
+>((acc, item) => {
+  const existingItem = acc.find((cartItem) => cartItem.title === item.title);
+  if (existingItem) {
+    existingItem.amount++;
+    existingItem.totalPrice =
+      existingItem.amount * parseFloat(existingItem.price);
+  } else {
+    acc.push({ ...item, amount: 1, totalPrice: parseFloat(item.price) });
+  }
+  return acc;
+}, []);
+
+const orderPrice: number = totalCartItems.reduce((total, item) => {
+  return total + item.totalPrice;
+}, 0);
 
 const Cart: FC = () => {
   const {
     WebApp: { MainButton, BackButton, themeParams },
   } = useTelegram();
-  const [total, setTotal] = useState(250);
 
   MainButton.setParams({
-    text: `PAY ${total}$`,
+    text: `PAY ${orderPrice}$`,
   });
 
   BackButton.show();
