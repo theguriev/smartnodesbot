@@ -26,7 +26,7 @@ const List = () => {
       MainButton.hide();
     } else {
       MainButton.setParams({
-        text: "BUY",
+        text: "VIEW ORDER",
         color: "#33b445",
       });
       MainButton.show();
