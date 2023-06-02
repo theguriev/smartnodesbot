@@ -109,6 +109,11 @@ declare namespace TelegramWebApps {
      * Also available as the CSS variable var(--tg-theme-button-text-color).
      */
     button_text_color?: string;
+    /**
+     * Secondary background color in the #RRGGBB format.
+     * Also available as the CSS variable var(--tg-theme-secondary-bg-color)
+     */
+    secondary_bg_color?: string;
   }
 
   interface WebAppInitData {

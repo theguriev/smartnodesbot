@@ -14,8 +14,6 @@ module.exports = {
         funny: "#174F78",
         lucky: "#061538",
         active: "#33b445",
-        calm: "#f4f4f5",
-        lazy: "#fff"
       },
       keyframes: {
         badgeShow: {

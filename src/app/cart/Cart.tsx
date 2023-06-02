@@ -17,7 +17,7 @@ const mockedCartItems = [
 
 const Cart: FC = () => {
   const {
-    WebApp: { MainButton, BackButton },
+    WebApp: { MainButton, BackButton, themeParams },
   } = useTelegram();
   const [total, setTotal] = useState(250);
 
@@ -34,12 +34,17 @@ const Cart: FC = () => {
     router.back();
   });
   return (
-    <div className="flex flex-col font-sans bg-calm h-screen">
-      <div className="flex justify-between py-5 px-6 bg-lazy">
-        <span
-          className="font-bold"
-          style={{ color: window?.Telegram?.WebApp?.themeParams?.text_color }}
-        >
+    <div
+      className="flex flex-col font-sans h-screen"
+      style={{
+        backgroundColor: themeParams?.secondary_bg_color,
+      }}
+    >
+      <div
+        className="flex justify-between py-5 px-6"
+        style={{ backgroundColor: themeParams?.bg_color }}
+      >
+        <span className="font-bold" style={{ color: themeParams?.text_color }}>
           YOUR ORDER
         </span>
         <span className=" text-active">
@@ -48,10 +53,14 @@ const Cart: FC = () => {
       </div>
       <CartItem />
       <div className=" pt-3 flex flex-col h-full">
-        <input className="px-6 py-3 text-base focus:outline-none" placeholder="Add comment..." />
+        <input
+          className="px-6 py-3 text-base focus:outline-none"
+          placeholder="Add comment..."
+          style={{ color: themeParams?.text_color }}
+        />
         <span
           className="px-6 pt-3 pb-6 text-sm"
-          style={{ color: window?.Telegram?.WebApp?.themeParams?.hint_color }}
+          style={{ color: themeParams?.hint_color }}
         >
           Any special requests, details, final wishes etc.
         </span>
