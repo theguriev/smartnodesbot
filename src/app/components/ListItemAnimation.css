@@ -1,0 +1,29 @@
+@keyframes squeezeIn {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 45%;
+  }
+}
+
+@keyframes squeezeOut {
+  0% {
+    transform-origin: right;
+    transform: scaleX(0.45);
+  }
+
+  100% {
+    transform-origin: right;
+    transform: scaleX(1);
+  }
+}
+
+.add_button.entering {
+  animation: squeezeIn 0.1s forwards;
+}
+
+.add_button.exiting {
+  animation: squeezeOut 0.1s forwards;
+}

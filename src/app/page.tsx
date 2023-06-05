@@ -1,14 +1,14 @@
 "use client";
 import Script from "next/script";
 import { useState } from "react";
-import ListItem from "./ListItem";
-import List from "./List";
+import List from "./components/List";
 
 const Home = () => {
   const [ready, setReady] = useState(false);
   const handleReady = () => {
     setReady(true);
   };
+
   return (
     <>
       <Script

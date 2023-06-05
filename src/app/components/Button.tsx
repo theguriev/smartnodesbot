@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC, MouseEventHandler, PropsWithChildren, useState } from "react";
+import { FC, MouseEventHandler, PropsWithChildren } from "react";
 
 const Button: FC<
   PropsWithChildren<{

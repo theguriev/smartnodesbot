@@ -45,6 +45,10 @@ declare namespace TelegramWebApps {
      */
     viewportStableHeight: number;
     /**
+     * An object for controlling the back button which can be displayed in the header of the Web App in the Telegram interface.
+     */
+    BackButton: BackButton;
+    /**
      * An object for controlling the main button, which is displayed at the bottom of the Web App in the Telegram interface.
      */
     MainButton: MainButton;
@@ -105,6 +109,11 @@ declare namespace TelegramWebApps {
      * Also available as the CSS variable var(--tg-theme-button-text-color).
      */
     button_text_color?: string;
+    /**
+     * Secondary background color in the #RRGGBB format.
+     * Also available as the CSS variable var(--tg-theme-secondary-bg-color)
+     */
+    secondary_bg_color?: string;
   }
 
   interface WebAppInitData {
@@ -250,6 +259,29 @@ declare namespace TelegramWebApps {
      */
     is_visible?: boolean;
   }
+}
+
+interface BackButton {
+  /**
+   * Shows whether the button is visible. Set to false by default.
+   *
+  isVisible: Boolean;
+  /**
+   * 	A method that sets the button press event handler. An alias for Telegram.WebApp.onEvent('backButtonClicked', callback)
+   */
+  onClick(callback: Function): BackButton;
+  /**
+   * 	A method that removes the button press event handler. An alias for Telegram.WebApp.offEvent('backButtonClicked', callback)
+   */
+  offClick(callback: Function): BackButton;
+  /**
+   * A method to make the button active and visible.
+   */
+  show(): BackButton;
+  /**
+   * A method to hide the button.
+   */
+  hide(): BackButton;
 }
 
 declare global {

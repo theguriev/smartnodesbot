@@ -9,10 +9,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "smart": "#3498da",
-        "kind": "#0A2463",
-        "funny": "#174F78",
-        "lucky": "#061538"
+        smart: "#3498da",
+        kind: "#0A2463",
+        funny: "#174F78",
+        lucky: "#061538",
+        active: "#33b445",
       },
       keyframes: {
         badgeShow: {

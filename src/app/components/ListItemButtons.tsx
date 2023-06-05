@@ -2,6 +2,7 @@ import { FC, MouseEventHandler } from "react";
 import Button from "./Button";
 import Transition from "react-transition-group/Transition";
 import classNames from "classnames";
+import "./ListItemAnimation.css";
 
 const ListItemButtons: FC<{
   onRemove?: MouseEventHandler<HTMLButtonElement>;
