@@ -1,44 +1,44 @@
 "use client";
 import "./ListItemAnimation.css";
-import { FC, MouseEventHandler } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import Badge from "./Badge";
 import Title from "./Title";
 import ListItemButtons from "./ListItemButtons";
-import { CountedCartItemType } from "../types";
+import { Project } from "../types";
 
 const ListItem: FC<
-  CountedCartItemType & {
-    onAdd: (product: CountedCartItemType) => void;
-    onRemove: (product: CountedCartItemType) => void;
+  Project & {
+    onAdd: (id: number) => void;
+    onRemove: (id: number) => void;
+    amount: number;
   }
-> = ({ onAdd, onRemove, ...cartItemProps }) => {
-  const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-    onAdd(cartItemProps);
+> = ({ onAdd, onRemove, amount, ...project }) => {
+  const handleAddClick = () => {
+    onAdd(project.id);
   };
 
   const handleRemoveClick = () => {
-    onRemove(cartItemProps);
+    onRemove(project.id);
   };
 
   return (
     <div className="relative font-sans w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
-      <Badge amount={cartItemProps.amount} name={cartItemProps.name} />
+      <Badge amount={amount} name={project.name} />
       <div>
         <Image
           className="rounded-full"
-          // src={cartItemProps.imageUrl}
           src="/lava.webp"
           width={74}
           height={74}
           alt="failed to load"
         />
       </div>
-      <Title price={cartItemProps.monthlyPrice} title={cartItemProps.name} />
+      <Title price={project.monthlyPrice} title={project.name} />
       <ListItemButtons
         onAdd={handleAddClick}
         onRemove={handleRemoveClick}
-        amount={cartItemProps.amount}
+        amount={amount}
       />
     </div>
   );

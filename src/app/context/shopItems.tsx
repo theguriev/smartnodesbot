@@ -9,6 +9,7 @@ import {
 } from "react";
 import { CartItemType, CountedCartItemType } from "../types";
 import { fetchShopItems } from "../api/shopItems";
+import fetchProjects from "../api/fetchProjects";
 
 interface ContextValue {
   shopItems: CountedCartItemType[];

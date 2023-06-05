@@ -1,72 +1,62 @@
+"use client";
+import { useEffect, useCallback, FC } from "react";
 import { useRouter } from "next/navigation";
-import { useTelegram } from "../hooks/useTelegram";
 import ListItem from "./ListItem";
-import { CountedCartItemType } from "../types";
-import { useShopItemsContext } from "../context/shopItems";
+import { Project } from "../types";
+import { useStoreContext } from "../context/store";
 
-const List = () => {
-  const { shopItems, setShopItems } = useShopItemsContext();
-  console.log(shopItems, "list");
+const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
+  const { store, add, remove } = useStoreContext();
+
   const router = useRouter();
-  const {
-    WebApp: { MainButton, BackButton },
-  } = useTelegram();
-  const showMainButton = (items: Array<CountedCartItemType>) => {
-    if (items.length === 0) {
-      MainButton.hide();
-    } else {
-      MainButton.setParams({
-        text: "VIEW ORDER",
-        color: "#33b445",
-      });
-      MainButton.show();
+
+  const handleMainButtonClick = useCallback(() => {
+    router.push("/cart");
+  }, [router]);
+
+  useEffect(() => {
+    window.Telegram.WebApp.BackButton.hide();
+  }, []);
+
+  useEffect(() => {
+    window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick);
+    return () => {
+      window.Telegram.WebApp.MainButton.offClick(handleMainButtonClick);
+    };
+  }, [handleMainButtonClick]);
+
+  useEffect(() => {
+    const total = Array.from(store.entries()).reduce(
+      (sum, [_, amount]) => sum + amount,
+      0
+    );
+    if (total === 0) {
+      window.Telegram.WebApp.MainButton.hide();
+      return;
     }
-  };
-
-  BackButton.hide();
-  MainButton.onClick(() => router.push("/cart"));
-
-  const handleAdd = (product: CountedCartItemType) => {
-    const updatedItems = shopItems.map((item) => {
-      if (item.id === product.id) {
-        return {
-          ...item,
-          amount: item.amount + 1,
-          totalPrice: (item.amount + 1) * item.monthlyPrice,
-        };
-      }
-      return item;
+    window.Telegram.WebApp.MainButton.setParams({
+      text: "VIEW ORDER",
+      color: "#33b445",
     });
-    setShopItems(updatedItems);
-    showMainButton(updatedItems);
-  };
-
-  const handleRemove = (product: CountedCartItemType) => {
-    const updatedItems = shopItems.map((item) => {
-      if (item.id === product.id) {
-        return {
-          ...item,
-          amount: item.amount - 1,
-          totalPrice: (item.amount - 1) * item.monthlyPrice,
-        };
-      }
-      return item;
-    });
-    setShopItems(updatedItems);
-    showMainButton(updatedItems);
-  };
+    window.Telegram.WebApp.MainButton.show();
+  }, [store]);
 
   return (
     <>
       <div className="flex flex-wrap justify-start">
-        {shopItems.map((shopItem) => (
-          <ListItem
-            key={shopItem.id}
-            {...shopItem}
-            onAdd={handleAdd}
-            onRemove={handleRemove}
-          />
-        ))}
+        {projects ? (
+          projects.map((project) => (
+            <ListItem
+              key={project.id}
+              {...project}
+              onAdd={add}
+              onRemove={remove}
+              amount={store.get(project.id) || 0}
+            />
+          ))
+        ) : (
+          <div>loading...</div>
+        )}
         <button onClick={() => router.push("/cart")}>to cart</button>
       </div>
     </>

@@ -1,7 +1,7 @@
 "use client";
 import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import { useTelegram } from "../hooks/useTelegram";
+import useTelegram from "@/app/hooks/useTelegram";
 
 type Animations =
   | "animate-badgeHide"
@@ -32,29 +32,25 @@ const getAnimationName = (
       ? "animate-badgeDecrementSame"
       : "animate-badgeDecrement";
   }
-  // if(prev === next) {
-  //   what to return to show badge if prev === next
-  // }
-  
 };
 
 const Badge: FC<{
   amount: number;
-  name: string
+  name: string;
 }> = ({ amount, name }) => {
-  const {
-    WebApp: { colorScheme },
-  } = useTelegram();
+  const telegram = useTelegram();
+  const colorScheme = telegram?.WebApp.colorScheme;
 
   const prevAmountRef = useRef(amount);
-  const [animation, setAnimation] = useState<Animations>();
+  const [animation, setAnimation] = useState<Animations | undefined>(
+    amount > 0 ? "animate-badgeShow" : "animate-badgeHide"
+  );
   useEffect(() => {
     setAnimation(getAnimationName(prevAmountRef.current, amount, animation));
     prevAmountRef.current = amount;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount]);
 
-  console.log(amount, "amount", prevAmountRef.current, "prev", name )
   return (
     <>
       {amount > 0 && (

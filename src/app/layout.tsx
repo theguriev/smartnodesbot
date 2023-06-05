@@ -1,5 +1,6 @@
 import "./globals.css";
-import { ShopItemsContextProvider } from "./context/shopItems";
+import Script from "next/script";
+import { StoreContextProvider } from "./context/store";
 
 export const metadata = {
   title: "Smart Nodes Bot",
@@ -14,7 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
+        <Script src="https://telegram.org/js/telegram-web-app.js" defer />
+        <StoreContextProvider>{children}</StoreContextProvider>
       </body>
     </html>
   );

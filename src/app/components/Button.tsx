@@ -8,7 +8,7 @@ const Button: FC<
     variant?: "primary" | "secondary";
   }>
 > = ({ className, onClick, children, variant }) => {
-  const theme = window?.Telegram?.WebApp?.colorScheme;
+  const theme = "light";
 
   const variantDictionary = {
     primary: theme === "light" ? "bg-smart" : "bg-funny",
