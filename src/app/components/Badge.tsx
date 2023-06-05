@@ -1,6 +1,7 @@
 "use client";
 import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
+import useTelegram from "@/app/hooks/useTelegram";
 
 type Animations =
   | "animate-badgeHide"
@@ -34,27 +35,36 @@ const getAnimationName = (
 };
 
 const Badge: FC<{
-  counter: number;
-}> = ({ counter }) => {
-  const { colorScheme } = window?.Telegram?.WebApp;
-  const prevCounterRef = useRef(counter);
-  const [animation, setAnimation] = useState<Animations>();
+  amount: number;
+  name: string;
+}> = ({ amount, name }) => {
+  const telegram = useTelegram();
+  const colorScheme = telegram?.WebApp.colorScheme;
+
+  const prevAmountRef = useRef(amount);
+  const [animation, setAnimation] = useState<Animations | undefined>(
+    amount > 0 ? "animate-badgeShow" : "animate-badgeHide"
+  );
   useEffect(() => {
-    setAnimation(getAnimationName(prevCounterRef.current, counter, animation));
-    prevCounterRef.current = counter;
+    setAnimation(getAnimationName(prevAmountRef.current, amount, animation));
+    prevAmountRef.current = amount;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [counter]);
+  }, [amount]);
 
   return (
-    <div
-      className={classNames(
-        animation,
-        colorScheme === "light" ? "bg-smart" : "bg-funny",
-        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+    <>
+      {amount > 0 && (
+        <div
+          className={classNames(
+            animation,
+            colorScheme === "light" ? "bg-smart" : "bg-funny",
+            "flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+          )}
+        >
+          {amount}
+        </div>
       )}
-    >
-      {counter === 0 ? 1 : counter}
-    </div>
+    </>
   );
 };
 

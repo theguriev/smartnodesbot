@@ -207,6 +207,7 @@ declare namespace TelegramWebApps {
      * A method that sets the button press event handler. An alias for Telegram.WebApp.onEvent('mainButtonClicked', callback)
      */
     onClick(callback: Function): MainButton;
+    offClick(callback: Function): MainButton;
     /**
      * A method to make the button visible.
      */

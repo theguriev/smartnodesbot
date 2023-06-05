@@ -1,71 +1,63 @@
 "use client";
-import { useState } from "react";
-import ListItem from "./ListItem";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useCallback, FC } from "react";
 import { useRouter } from "next/navigation";
-import { CartItemType } from "../types";
-import { useTelegram } from "../hooks/useTelegram";
+import ListItem from "./ListItem";
+import { Project } from "../types";
+import { useStoreContext } from "../context/store";
 
-const mockedShopItems = [
-  { img: "/lava.webp", title: "Lava", price: "240", id: uuidv4() },
-  { img: "/defund.webp", title: "DeFund", price: "230", id: uuidv4() },
-  { img: "/chainflip.webp", title: "Chainflip", price: "240", id: uuidv4() },
-  { img: "/shardeum.webp", title: "Shardeum", price: "240", id: uuidv4() },
-  { img: "/muon-network.webp", title: "Muon", price: "230", id: uuidv4() },
-  { img: "/massa.webp", title: "Massa", price: "240$", id: uuidv4() },
-  { img: "/elixir-finance.webp", title: "Elixir", price: "240", id: uuidv4() },
-];
-
-const List = () => {
-  const {
-    WebApp: { MainButton, BackButton },
-  } = useTelegram();
-  const [addedItems, setAddedItems] = useState<CartItemType[]>([]);
-  const showMainButton = (items: Array<CartItemType>) => {
-    if (items.length === 0) {
-      MainButton.hide();
-    } else {
-      MainButton.setParams({
-        text: "VIEW ORDER",
-        color: "#33b445",
-      });
-      MainButton.show();
-    }
-  };
-
-  BackButton.hide();
-
-  const handleAdd = (product: CartItemType) => {
-    let newItems: CartItemType[] = [...addedItems, product];
-    setAddedItems(newItems);
-    showMainButton(newItems);
-  };
-
-  const handleRemove = (product: CartItemType) => {
-    const indexToRemove = addedItems.findIndex(
-      (item) => item.id === product.id
-    );
-    if (indexToRemove !== -1) {
-      const newItems = [...addedItems];
-      newItems.splice(indexToRemove, 1);
-      setAddedItems(newItems);
-      showMainButton(newItems);
-    }
-  };
+const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
+  const { store, add, remove } = useStoreContext();
 
   const router = useRouter();
-  MainButton.onClick(() => router.push("/cart"));
+
+  const handleMainButtonClick = useCallback(() => {
+    router.push("/cart");
+  }, [router]);
+
+  useEffect(() => {
+    window.Telegram.WebApp.BackButton.hide();
+  }, []);
+
+  useEffect(() => {
+    window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick);
+    return () => {
+      window.Telegram.WebApp.MainButton.offClick(handleMainButtonClick);
+    };
+  }, [handleMainButtonClick]);
+
+  useEffect(() => {
+    const total = Array.from(store.entries()).reduce(
+      (sum, [_, amount]) => sum + amount,
+      0
+    );
+    if (total === 0) {
+      window.Telegram.WebApp.MainButton.hide();
+      return;
+    }
+    window.Telegram.WebApp.MainButton.setParams({
+      text: "VIEW ORDER",
+      color: "#33b445",
+    });
+    window.Telegram.WebApp.MainButton.show();
+  }, [store]);
+
   return (
     <>
       <div className="flex flex-wrap justify-start">
-        {mockedShopItems.map((shopItem) => (
-          <ListItem
-            key={shopItem.id}
-            {...shopItem}
-            onAdd={handleAdd}
-            onRemove={handleRemove}
-          />
-        ))}
+        {projects ? (
+          projects.map((project) => (
+            <ListItem
+              key={project.id}
+              {...project}
+              onAdd={add}
+              onRemove={remove}
+              amount={store.get(project.id) || 0}
+            />
+          ))
+        ) : (
+          <div>loading...</div>
+        )}
+        <button onClick={() => router.push("/cart")}>to cart</button>
       </div>
     </>
   );

@@ -1,27 +1,17 @@
-"use client";
-import Script from "next/script";
-import { useState } from "react";
-import List from "./components/List";
+import { Suspense } from "react";
+import Projects from "./components/Projects";
 
 const Home = () => {
-  const [ready, setReady] = useState(false);
-  const handleReady = () => {
-    setReady(true);
-  };
-
   return (
     <>
-      <Script
-        src="https://telegram.org/js/telegram-web-app.js"
-        onReady={handleReady}
-      />
-      {ready && (
+      <Suspense fallback={<div>Loading...</div>}>
         <div className="flex justify-center">
           <div className="max-w-[360px] flex justify-center">
-            <List />
+            {/* @ts-expect-error Server Component */}
+            <Projects />
           </div>
         </div>
-      )}
+      </Suspense>
     </>
   );
 };

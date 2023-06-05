@@ -1,47 +1,44 @@
 "use client";
 import "./ListItemAnimation.css";
-import { useState, FC, MouseEventHandler } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import Badge from "./Badge";
 import Title from "./Title";
 import ListItemButtons from "./ListItemButtons";
-import { CartItemType } from "../types";
+import { Project } from "../types";
 
 const ListItem: FC<
-  CartItemType & {
-    onAdd: (product: CartItemType) => void;
-    onRemove: (product: CartItemType) => void;
+  Project & {
+    onAdd: (id: number) => void;
+    onRemove: (id: number) => void;
+    amount: number;
   }
-> = ({ img, title, price, id, onAdd, onRemove }) => {
-  const [counter, setCounter] = useState(0);
-
-  const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-    setCounter((prevCounter) => prevCounter + 1);
-    onAdd({ img, title, price, id });
+> = ({ onAdd, onRemove, amount, ...project }) => {
+  const handleAddClick = () => {
+    onAdd(project.id);
   };
 
   const handleRemoveClick = () => {
-    setCounter((prevCounter) => prevCounter - 1);
-    onRemove({ img, title, price, id });
+    onRemove(project.id);
   };
 
   return (
     <div className="relative font-sans w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
-      <Badge counter={counter} />
+      <Badge amount={amount} name={project.name} />
       <div>
         <Image
           className="rounded-full"
-          src={img}
+          src="/lava.webp"
           width={74}
           height={74}
           alt="failed to load"
         />
       </div>
-      <Title price={price} title={title} />
+      <Title price={project.monthlyPrice} title={project.name} />
       <ListItemButtons
         onAdd={handleAddClick}
         onRemove={handleRemoveClick}
-        counter={counter}
+        amount={amount}
       />
     </div>
   );

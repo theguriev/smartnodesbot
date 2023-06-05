@@ -1,23 +1,12 @@
-"use client";
-import Script from "next/script";
-import { FC, useState } from "react";
-import Cart from "./Cart";
+import { Suspense } from "react";
+import Projects from "./components/Projects";
 
-
-const CartHome: FC = () => {
-  const [ready, setReady] = useState(false);
-  const handleReady = () => {
-    setReady(true);
-  };
-
+const CartHome = () => {
   return (
-    <>
-      <Script
-        src="https://telegram.org/js/telegram-web-app.js"
-        onReady={handleReady}
-      />
-      {ready && <Cart />}
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      {/* @ts-expect-error Server Component */}
+      <Projects />
+    </Suspense>
   );
 };
 export default CartHome;
