@@ -35,13 +35,13 @@ const List = () => {
 
   BackButton.hide();
 
-  const onAdd = (product: CartItemType) => {
+  const handleAdd = (product: CartItemType) => {
     let newItems: CartItemType[] = [...addedItems, product];
     setAddedItems(newItems);
     showMainButton(newItems);
   };
 
-  const onRemove = (product: CartItemType) => {
+  const handleRemove = (product: CartItemType) => {
     const indexToRemove = addedItems.findIndex(
       (item) => item.id === product.id
     );
@@ -62,8 +62,8 @@ const List = () => {
           <ListItem
             key={shopItem.id}
             {...shopItem}
-            onAdd={onAdd}
-            onRemove={onRemove}
+            onAdd={handleAdd}
+            onRemove={handleRemove}
           />
         ))}
       </div>
