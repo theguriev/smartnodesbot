@@ -12,17 +12,17 @@ const ListItem: FC<
     onAdd: (product: CartItemType) => void;
     onRemove: (product: CartItemType) => void;
   }
-> = ({ img, title, price, id, onAdd, onRemove }) => {
+> = ({ onAdd, onRemove, ...cartItemProps }) => {
   const [counter, setCounter] = useState(0);
 
   const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     setCounter((prevCounter) => prevCounter + 1);
-    onAdd({ img, title, price, id });
+    onAdd(cartItemProps);
   };
 
   const handleRemoveClick = () => {
     setCounter((prevCounter) => prevCounter - 1);
-    onRemove({ img, title, price, id });
+    onRemove(cartItemProps);
   };
 
   return (
@@ -31,13 +31,14 @@ const ListItem: FC<
       <div>
         <Image
           className="rounded-full"
-          src={img}
+          // src={cartItemProps.imageUrl}
+          src="/lava.webp"
           width={74}
           height={74}
           alt="failed to load"
         />
       </div>
-      <Title price={price} title={title} />
+      <Title price={cartItemProps.monthlyPrice} title={cartItemProps.name} />
       <ListItemButtons
         onAdd={handleAddClick}
         onRemove={handleRemoveClick}
