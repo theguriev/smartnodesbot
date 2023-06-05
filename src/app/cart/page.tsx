@@ -1,9 +1,7 @@
 "use client";
 import Script from "next/script";
 import { FC, useState } from "react";
-import { useRouter } from "next/navigation";
 import Cart from "./Cart";
-// import useTelegram from "../useTelegram";
 
 const CartHome: FC = () => {
   const [ready, setReady] = useState(false);

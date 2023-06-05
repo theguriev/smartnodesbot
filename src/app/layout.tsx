@@ -1,5 +1,5 @@
 import "./globals.css";
-import { AddedItemsContextProvider } from "./context/addedItems";
+import { ShopItemsContextProvider } from "./context/shopItems";
 
 export const metadata = {
   title: "Smart Nodes Bot",
@@ -14,10 +14,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AddedItemsContextProvider>
-        {children}
-        </AddedItemsContextProvider>
-        </body>
+        <ShopItemsContextProvider>{children}</ShopItemsContextProvider>
+      </body>
     </html>
   );
 }
