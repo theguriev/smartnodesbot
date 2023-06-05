@@ -1,6 +1,7 @@
 "use client";
 import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
+import { useTelegram } from "../hooks/useTelegram";
 
 type Animations =
   | "animate-badgeHide"
@@ -31,30 +32,43 @@ const getAnimationName = (
       ? "animate-badgeDecrementSame"
       : "animate-badgeDecrement";
   }
+  // if(prev === next) {
+  //   what to return to show badge if prev === next
+  // }
+  
 };
 
 const Badge: FC<{
-  counter: number;
-}> = ({ counter }) => {
-  const { colorScheme } = window?.Telegram?.WebApp;
-  const prevCounterRef = useRef(counter);
+  amount: number;
+  name: string
+}> = ({ amount, name }) => {
+  const {
+    WebApp: { colorScheme },
+  } = useTelegram();
+
+  const prevAmountRef = useRef(amount);
   const [animation, setAnimation] = useState<Animations>();
   useEffect(() => {
-    setAnimation(getAnimationName(prevCounterRef.current, counter, animation));
-    prevCounterRef.current = counter;
+    setAnimation(getAnimationName(prevAmountRef.current, amount, animation));
+    prevAmountRef.current = amount;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [counter]);
+  }, [amount]);
 
+  console.log(amount, "amount", prevAmountRef.current, "prev", name )
   return (
-    <div
-      className={classNames(
-        animation,
-        colorScheme === "light" ? "bg-smart" : "bg-funny",
-        "counter flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+    <>
+      {amount > 0 && (
+        <div
+          className={classNames(
+            animation,
+            colorScheme === "light" ? "bg-smart" : "bg-funny",
+            "flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+          )}
+        >
+          {amount}
+        </div>
       )}
-    >
-      {counter === 0 ? 1 : counter}
-    </div>
+    </>
   );
 };
 
