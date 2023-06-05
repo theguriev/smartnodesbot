@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import ListItem from "./ListItem";
-import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import { CartItemType } from "../types";
 import { useTelegram } from "../hooks/useTelegram";
+import ListItem from "./ListItem";
+import { CartItemType } from "../types";
 import { fetchShopItems } from "../api/shopItems";
 
 // const mockedShopItems = [
@@ -19,6 +18,25 @@ import { fetchShopItems } from "../api/shopItems";
 
 const List = () => {
   const [shopItems, setShopItems] = useState<CartItemType[]>([]);
+  const [addedItems, setAddedItems] = useState<CartItemType[]>([]);
+  const router = useRouter();
+  const {
+    WebApp: { MainButton, BackButton },
+  } = useTelegram();
+  const showMainButton = (items: Array<CartItemType>) => {
+    if (items.length === 0) {
+      MainButton.hide();
+    } else {
+      MainButton.setParams({
+        text: "VIEW ORDER",
+        color: "#33b445",
+      });
+      MainButton.show();
+    }
+  };
+  
+  BackButton.hide();
+  MainButton.onClick(() => router.push("/cart"));
 
   const fetchedShopItems = async () => {
     try {
@@ -32,24 +50,6 @@ const List = () => {
   useEffect(() => {
     fetchedShopItems();
   }, []);
-
-  const {
-    WebApp: { MainButton, BackButton },
-  } = useTelegram();
-  const [addedItems, setAddedItems] = useState<CartItemType[]>([]);
-  const showMainButton = (items: Array<CartItemType>) => {
-    if (items.length === 0) {
-      MainButton.hide();
-    } else {
-      MainButton.setParams({
-        text: "VIEW ORDER",
-        color: "#33b445",
-      });
-      MainButton.show();
-    }
-  };
-
-  BackButton.hide();
 
   const onAdd = (product: CartItemType) => {
     let newItems: CartItemType[] = [...addedItems, product];
@@ -69,8 +69,6 @@ const List = () => {
     }
   };
 
-  const router = useRouter();
-  MainButton.onClick(() => router.push("/cart"));
   return (
     <>
       <div className="flex flex-wrap justify-start">
