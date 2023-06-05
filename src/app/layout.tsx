@@ -1,4 +1,5 @@
 import "./globals.css";
+import { AddedItemsContextProvider } from "./context/addedItems";
 
 export const metadata = {
   title: "Smart Nodes Bot",
@@ -12,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AddedItemsContextProvider>
+        {children}
+        </AddedItemsContextProvider>
+        </body>
     </html>
   );
 }

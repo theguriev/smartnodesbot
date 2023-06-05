@@ -5,20 +5,11 @@ import { useTelegram } from "../hooks/useTelegram";
 import ListItem from "./ListItem";
 import { CartItemType } from "../types";
 import { fetchShopItems } from "../api/shopItems";
-
-// const mockedShopItems = [
-//   { img: "/lava.webp", title: "Lava", price: "240", id: uuidv4() },
-//   { img: "/defund.webp", title: "DeFund", price: "230", id: uuidv4() },
-//   { img: "/chainflip.webp", title: "Chainflip", price: "240", id: uuidv4() },
-//   { img: "/shardeum.webp", title: "Shardeum", price: "240", id: uuidv4() },
-//   { img: "/muon-network.webp", title: "Muon", price: "230", id: uuidv4() },
-//   { img: "/massa.webp", title: "Massa", price: "240$", id: uuidv4() },
-//   { img: "/elixir-finance.webp", title: "Elixir", price: "240", id: uuidv4() },
-// ];
+import { useAddedItemsContext } from "../context/addedItems";
 
 const List = () => {
   const [shopItems, setShopItems] = useState<CartItemType[]>([]);
-  const [addedItems, setAddedItems] = useState<CartItemType[]>([]);
+  const { addedItems, setAddedItems } = useAddedItemsContext();
   const router = useRouter();
   const {
     WebApp: { MainButton, BackButton },
@@ -34,7 +25,7 @@ const List = () => {
       MainButton.show();
     }
   };
-  
+
   BackButton.hide();
   MainButton.onClick(() => router.push("/cart"));
 
