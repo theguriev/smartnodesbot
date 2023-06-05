@@ -8,7 +8,18 @@ import {
   SetStateAction,
 } from "react";
 import { CartItemType, CountedCartItemType } from "../types";
-import { fetchShopItems } from "../api/shopItems";
+// import { fetchShopItems } from "../api/shopItems";
+
+const fetchShopItems = async () => {
+  return [
+    {
+      img: "",
+      title: "",
+      price: "",
+      id: "",
+    },
+  ];
+};
 
 interface ContextValue {
   shopItems: CountedCartItemType[];
