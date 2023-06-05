@@ -1,20 +1,17 @@
-"use client";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTelegram } from "../hooks/useTelegram";
 import ListItem from "./ListItem";
-import { CartItemType } from "../types";
-import { fetchShopItems } from "../api/shopItems";
-import { useAddedItemsContext } from "../context/addedItems";
+import { CountedCartItemType } from "../types";
+import { useShopItemsContext } from "../context/shopItems";
 
 const List = () => {
-  const [shopItems, setShopItems] = useState<CartItemType[]>([]);
-  const { addedItems, setAddedItems } = useAddedItemsContext();
+  const { shopItems, setShopItems } = useShopItemsContext();
+  console.log(shopItems, "list");
   const router = useRouter();
   const {
     WebApp: { MainButton, BackButton },
   } = useTelegram();
-  const showMainButton = (items: Array<CartItemType>) => {
+  const showMainButton = (items: Array<CountedCartItemType>) => {
     if (items.length === 0) {
       MainButton.hide();
     } else {
@@ -29,35 +26,34 @@ const List = () => {
   BackButton.hide();
   MainButton.onClick(() => router.push("/cart"));
 
-  const fetchedShopItems = async () => {
-    try {
-      const data = await fetchShopItems();
-      setShopItems(data as CartItemType[]);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleAdd = (product: CountedCartItemType) => {
+    const updatedItems = shopItems.map((item) => {
+      if (item.id === product.id) {
+        return {
+          ...item,
+          amount: item.amount + 1,
+          totalPrice: (item.amount + 1) * item.monthlyPrice,
+        };
+      }
+      return item;
+    });
+    setShopItems(updatedItems);
+    showMainButton(updatedItems);
   };
 
-  useEffect(() => {
-    fetchedShopItems();
-  }, []);
-
-  const onAdd = (product: CartItemType) => {
-    let newItems: CartItemType[] = [...addedItems, product];
-    setAddedItems(newItems);
-    showMainButton(newItems);
-  };
-
-  const onRemove = (product: CartItemType) => {
-    const indexToRemove = addedItems.findIndex(
-      (item) => item.id === product.id
-    );
-    if (indexToRemove !== -1) {
-      const newItems = [...addedItems];
-      newItems.splice(indexToRemove, 1);
-      setAddedItems(newItems);
-      showMainButton(newItems);
-    }
+  const handleRemove = (product: CountedCartItemType) => {
+    const updatedItems = shopItems.map((item) => {
+      if (item.id === product.id) {
+        return {
+          ...item,
+          amount: item.amount - 1,
+          totalPrice: (item.amount - 1) * item.monthlyPrice,
+        };
+      }
+      return item;
+    });
+    setShopItems(updatedItems);
+    showMainButton(updatedItems);
   };
 
   return (
@@ -67,10 +63,11 @@ const List = () => {
           <ListItem
             key={shopItem.id}
             {...shopItem}
-            onAdd={onAdd}
-            onRemove={onRemove}
+            onAdd={handleAdd}
+            onRemove={handleRemove}
           />
         ))}
+        <button onClick={() => router.push("/cart")}>to cart</button>
       </div>
     </>
   );

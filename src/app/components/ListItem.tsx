@@ -1,33 +1,29 @@
 "use client";
 import "./ListItemAnimation.css";
-import { useState, FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler } from "react";
 import Image from "next/image";
 import Badge from "./Badge";
 import Title from "./Title";
 import ListItemButtons from "./ListItemButtons";
-import { CartItemType } from "../types";
+import { CountedCartItemType } from "../types";
 
 const ListItem: FC<
-  CartItemType & {
-    onAdd: (product: CartItemType) => void;
-    onRemove: (product: CartItemType) => void;
+  CountedCartItemType & {
+    onAdd: (product: CountedCartItemType) => void;
+    onRemove: (product: CountedCartItemType) => void;
   }
 > = ({ onAdd, onRemove, ...cartItemProps }) => {
-  const [counter, setCounter] = useState(0);
-
   const handleAddClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-    setCounter((prevCounter) => prevCounter + 1);
     onAdd(cartItemProps);
   };
 
   const handleRemoveClick = () => {
-    setCounter((prevCounter) => prevCounter - 1);
     onRemove(cartItemProps);
   };
 
   return (
     <div className="relative font-sans w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
-      <Badge counter={counter} />
+      <Badge amount={cartItemProps.amount} name={cartItemProps.name} />
       <div>
         <Image
           className="rounded-full"
@@ -42,7 +38,7 @@ const ListItem: FC<
       <ListItemButtons
         onAdd={handleAddClick}
         onRemove={handleRemoveClick}
-        counter={counter}
+        amount={cartItemProps.amount}
       />
     </div>
   );
