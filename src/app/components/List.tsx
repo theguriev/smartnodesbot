@@ -62,7 +62,12 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
             </div>
           </div>
         )}
-        <button onClick={() => router.push("/cart")}>to cart</button>
+        <button
+          className="absolute bottom-4 left-0 right-0"
+          onClick={() => router.push("/cart")}
+        >
+          Only for debug purposes: go to cart
+        </button>
       </div>
     </>
   );
