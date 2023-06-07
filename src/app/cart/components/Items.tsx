@@ -36,7 +36,10 @@ const Items: FC<{
   }, [telegram, router]);
 
   useEffect(() => {
-    const sum = storeItems.reduce((sum, { amount }) => sum + amount, 0);
+    const sum = storeItems.reduce(
+      (sum, { amount, monthlyPrice }) => sum + amount * (monthlyPrice || 0),
+      0
+    );
     telegram?.WebApp.MainButton.setParams({
       text: `PAY ${sum}$`,
     });
