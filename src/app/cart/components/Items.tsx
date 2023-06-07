@@ -25,12 +25,7 @@ const Items: FC<{
     [store, projectsMap]
   );
 
-  const orderPrice = 0;
-
   useEffect(() => {
-    telegram?.WebApp.MainButton.setParams({
-      text: `PAY ${orderPrice}$`,
-    });
     telegram?.WebApp.BackButton.show();
 
     telegram?.WebApp.BackButton.onClick(router.back);
@@ -39,6 +34,13 @@ const Items: FC<{
       telegram?.WebApp.BackButton.offClick(router.back);
     };
   }, [telegram, router]);
+
+  useEffect(() => {
+    const sum = storeItems.reduce((sum, { amount }) => sum + amount, 0);
+    telegram?.WebApp.MainButton.setParams({
+      text: `PAY ${sum}$`,
+    });
+  }, [storeItems, telegram]);
 
   return (
     <div
