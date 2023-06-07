@@ -14,7 +14,6 @@ const Items: FC<{
   const { store } = useStoreContext();
   const telegram = useTelegram();
   const router = useRouter();
-  const [inputType, setInputType] = useState<"qr" | "wallet">("qr");
 
   const storeItems = useMemo(
     () =>
@@ -36,7 +35,10 @@ const Items: FC<{
   }, [telegram, router]);
 
   useEffect(() => {
-    const sum = storeItems.reduce((sum, { amount }) => sum + amount, 0);
+    const sum = storeItems.reduce(
+      (sum, { amount, monthlyPrice }) => sum + amount * (monthlyPrice || 0),
+      0
+    );
     telegram?.WebApp.MainButton.setParams({
       text: `PAY ${sum}$`,
     });
@@ -89,44 +91,6 @@ const Items: FC<{
         >
           Any special requests, details, final wishes etc.
         </span>
-        <div className="flex space-x-4 mb-5 py-5 px-6">
-          <span
-            className="font-bold"
-            style={{ color: telegram?.WebApp.themeParams?.text_color }}
-          >
-            Payment method:
-          </span>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              value="qr"
-              className="form-radio h-4 w-4 text-blue-600"
-              checked={inputType === "qr"}
-              onChange={(e) => setInputType(e.target.value as "qr" | "wallet")}
-            />
-            <span
-              className="ml-2"
-              style={{ color: telegram?.WebApp.themeParams?.text_color }}
-            >
-              QR Code
-            </span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              value="wallet"
-              className="form-radio h-4 w-4 text-blue-600"
-              checked={inputType === "wallet"}
-              onChange={(e) => setInputType(e.target.value as "qr" | "wallet")}
-            />
-            <span
-              className="ml-2"
-              style={{ color: telegram?.WebApp.themeParams?.text_color }}
-            >
-              @wallet
-            </span>
-          </label>
-        </div>
       </div>
     </div>
   );
