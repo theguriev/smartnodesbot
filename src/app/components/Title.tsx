@@ -5,7 +5,7 @@ const Title: FC<{ title: string; price: number }> = ({ title, price }) => {
   const telegram = useTelegram();
   const color = telegram?.WebApp?.themeParams?.text_color;
   return (
-    <div className={`text-[13px] flex items-center gap-1`} style={{ color }}>
+    <div className={`text-sm flex items-center gap-1`} style={{ color }}>
       <span>{title}</span>
       <span>·</span>
       <span>{price}$</span>

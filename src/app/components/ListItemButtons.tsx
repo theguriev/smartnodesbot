@@ -9,12 +9,12 @@ const ListItemButtons: FC<{
   onAdd?: MouseEventHandler<HTMLButtonElement>;
   amount: number;
 }> = ({ onAdd, onRemove, amount }) => (
-  <div className="w-[80px] h-[30px] flex justify-between relative">
+  <div className="w-20 h-8 flex justify-between relative">
     <Button
       variant="secondary"
       onClick={onRemove}
       className={classNames(
-        "`w-[38px] text-[36px] font-sans h-[30px] flex items-center justify-center",
+        "`w-9 text-4xl font-sans h-8 flex items-center justify-center",
         amount === 0 && "hidden"
       )}
     >
@@ -28,10 +28,8 @@ const ListItemButtons: FC<{
           variant="primary"
           className={classNames(
             state,
-            "add_button absolute right-0 font-sans text-[14px] h-[30px] flex items-center justify-center",
-            amount === 0
-              ? "w-[80px] h-[30px] font-bold"
-              : "w-[38px] text-[30px]"
+            "add_button absolute right-0 font-sans text-sm h-8 flex items-center justify-center",
+            amount === 0 ? "w-20 h-8 font-bold" : "w-9 text-3xl"
           )}
         >
           <span className={classNames(amount === 0 && "hidden", "mt-[-4px]")}>
