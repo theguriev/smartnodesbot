@@ -102,7 +102,12 @@ const Items: FC<{
               checked={inputType === "qr"}
               onChange={(e) => setInputType(e.target.value as "qr" | "wallet")}
             />
-            <span className="ml-2">QR Code</span>
+            <span
+              className="ml-2"
+              style={{ color: telegram?.WebApp.themeParams?.text_color }}
+            >
+              QR Code
+            </span>
           </label>
           <label className="flex items-center">
             <input
@@ -112,10 +117,14 @@ const Items: FC<{
               checked={inputType === "wallet"}
               onChange={(e) => setInputType(e.target.value as "qr" | "wallet")}
             />
-            <span className="ml-2">Wallet</span>
+            <span
+              className="ml-2"
+              style={{ color: telegram?.WebApp.themeParams?.text_color }}
+            >
+              @wallet
+            </span>
           </label>
         </div>
-        <button onClick={() => router.back()}>to list</button>
       </div>
     </div>
   );
