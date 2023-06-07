@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import ListItem from "./ListItem";
 import { Project } from "../types";
 import { useStoreContext } from "../context/store";
+import Skeleton from "@/app/components/Skeleton";
 
 const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
   const { store, add, remove } = useStoreContext();
@@ -55,7 +56,11 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
             />
           ))
         ) : (
-          <div>loading...</div>
+          <div className="flex justify-center">
+            <div className="max-w-[360px] flex justify-center">
+              <Skeleton />
+            </div>
+          </div>
         )}
         <button onClick={() => router.push("/cart")}>to cart</button>
       </div>
