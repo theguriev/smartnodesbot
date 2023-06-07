@@ -18,8 +18,6 @@ const Projects = async () => {
       {}
     );
 
-  console.log("log:", response.data, toMap(response.data));
-
   return <Items projects={response.data} projectsMap={toMap(response.data)} />;
 };
 

@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useMemo } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useTelegram from "../../hooks/useTelegram";
@@ -11,9 +11,10 @@ const Items: FC<{
   projects: Array<Project>;
   projectsMap: Record<number, Project>;
 }> = ({ projectsMap }) => {
-  const { store, add, remove } = useStoreContext();
+  const { store } = useStoreContext();
   const telegram = useTelegram();
   const router = useRouter();
+  const [inputType, setInputType] = useState<"qr" | "wallet">("qr");
 
   const storeItems = useMemo(
     () =>
@@ -86,6 +87,34 @@ const Items: FC<{
         >
           Any special requests, details, final wishes etc.
         </span>
+        <div className="flex space-x-4 mb-5 py-5 px-6">
+          <span
+            className="font-bold"
+            style={{ color: telegram?.WebApp.themeParams?.text_color }}
+          >
+            Payment method:
+          </span>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              value="qr"
+              className="form-radio h-4 w-4 text-blue-600"
+              checked={inputType === "qr"}
+              onChange={(e) => setInputType(e.target.value as "qr" | "wallet")}
+            />
+            <span className="ml-2">QR Code</span>
+          </label>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              value="wallet"
+              className="form-radio h-4 w-4 text-blue-600"
+              checked={inputType === "wallet"}
+              onChange={(e) => setInputType(e.target.value as "qr" | "wallet")}
+            />
+            <span className="ml-2">Wallet</span>
+          </label>
+        </div>
         <button onClick={() => router.back()}>to list</button>
       </div>
     </div>
