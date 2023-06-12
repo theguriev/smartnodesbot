@@ -14,11 +14,11 @@ const TabNavigation: FC<{ onTabClick: (tab: string) => void;
 
 
   return (
-    <div className="flex font-sans justify-center mb-4">
+    <div className="flex font-sans justify-center mb-4 -ml-40">
       <button
       className={classNames(
         "flex w-20 h-10 items-center justify-center ",
-        selectedTab === "projects" && `border-b-2 ${theme ? "border-smart text-smart" : "border-funny text-funny" }`
+        selectedTab === "projects" && `border-b-2 ${theme === "light" ? "border-smart text-smart" : "border-funny text-funny" }`
       )}
         onClick={() => handleClick("projects")}
       >
@@ -27,7 +27,7 @@ const TabNavigation: FC<{ onTabClick: (tab: string) => void;
       <button
       className={classNames(
         "flex w-20 h-10 items-center justify-center ",
-        selectedTab === "new" && `border-b-2 ${theme ? "border-smart text-smart" : "border-funny text-funny" }`
+        selectedTab === "new" && `border-b-2 ${theme === "light" ? "border-smart text-smart" : "border-funny text-funny" }`
       )}
         onClick={() => handleClick("new")}
       >

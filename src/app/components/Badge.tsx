@@ -39,7 +39,7 @@ const Badge: FC<{
   name: string;
 }> = ({ amount, name }) => {
   const telegram = useTelegram();
-  const colorScheme = telegram?.WebApp.colorScheme;
+  const theme = telegram?.WebApp.colorScheme;
 
 
   const prevAmountRef = useRef(amount);
@@ -58,7 +58,7 @@ const Badge: FC<{
         <div
           className={classNames(
             animation,
-            colorScheme === "light" ? "bg-smart" : "bg-funny",
+            theme === "light" ? "bg-smart" : "bg-funny",
             "flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
           )}
         >
