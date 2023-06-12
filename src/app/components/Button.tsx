@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { FC, MouseEventHandler, PropsWithChildren } from "react";
+import useTelegram from "@/app/hooks/useTelegram";
 
 const Button: FC<
   PropsWithChildren<{
@@ -8,7 +9,8 @@ const Button: FC<
     variant?: "primary" | "secondary";
   }>
 > = ({ className, onClick, children, variant }) => {
-  const theme = "light";
+  const telegram = useTelegram();
+  const theme = telegram?.WebApp.colorScheme;
 
   const variantDictionary = {
     primary: theme === "light" ? "bg-smart" : "bg-funny",

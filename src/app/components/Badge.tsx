@@ -41,6 +41,7 @@ const Badge: FC<{
   const telegram = useTelegram();
   const colorScheme = telegram?.WebApp.colorScheme;
 
+
   const prevAmountRef = useRef(amount);
   const [animation, setAnimation] = useState<Animations | undefined>(
     amount > 0 ? "animate-badgeShow" : "animate-badgeHide"

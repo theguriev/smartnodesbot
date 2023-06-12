@@ -10,6 +10,7 @@ const TabNavigation: FC<{ onTabClick: (tab: string) => void;
   };
 
   const telegram = useTelegram();
+  const theme = telegram?.WebApp.colorScheme;
 
 
   return (
@@ -17,7 +18,7 @@ const TabNavigation: FC<{ onTabClick: (tab: string) => void;
       <button
       className={classNames(
         "flex w-20 h-10 items-center justify-center ",
-        selectedTab === "projects" && "border-b-2 border-smart text-smart"
+        selectedTab === "projects" && `border-b-2 ${theme ? "border-smart text-smart" : "border-funny text-funny" }`
       )}
         onClick={() => handleClick("projects")}
       >
@@ -26,7 +27,7 @@ const TabNavigation: FC<{ onTabClick: (tab: string) => void;
       <button
       className={classNames(
         "flex w-20 h-10 items-center justify-center ",
-        selectedTab === "new" && "border-b-2 border-smart text-smart"
+        selectedTab === "new" && `border-b-2 ${theme ? "border-smart text-smart" : "border-funny text-funny" }`
       )}
         onClick={() => handleClick("new")}
       >
