@@ -14,7 +14,7 @@ import List from "./List";
 // export default NewProjects;
 
 const NewProjects = () => {
-  return <div className="font-sans">NEW PROJECTS</div>;
+  return <div>NEW PROJECTS</div>;
 };
 
 export default NewProjects;

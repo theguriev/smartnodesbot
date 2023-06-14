@@ -46,7 +46,7 @@ const Items: FC<{
 
   return (
     <div
-      className="flex flex-col font-sans h-screen"
+      className="flex flex-col h-screen"
       style={{
         backgroundColor: telegram?.WebApp.themeParams.secondary_bg_color,
       }}

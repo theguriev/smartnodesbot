@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FC } from "react";
 import useTelegram from "../hooks/useTelegram";
 
@@ -12,13 +12,25 @@ const Skeleton: FC = () => {
       {divs.map((_, index) => (
         <div
           key={index}
-          className="relative font-sans w-[120px] h-[159px] flex flex-col items-center justify-center gap-2"
+          className="relative w-[120px] h-[159px] flex flex-col items-center justify-center gap-2"
         >
           <div>
-            <div className={`h-20 w-20 rounded-full animate-pulse ${theme === "light" ? "bg-gray-200" : "bg-gray-600"}`} />
+            <div
+              className={`h-20 w-20 rounded-full animate-pulse ${
+                theme === "light" ? "bg-gray-200" : "bg-gray-600"
+              }`}
+            />
           </div>
-          <div className={`text-sm h-3 w-16 rounded animate-pulse ${theme === "light" ? "bg-gray-200" : "bg-gray-600"}`} />
-          <div className={`bg-gray-200 w-20 h-8 rounded animate-pulse ${theme === "light" ? "bg-gray-200" : "bg-gray-600"}`} />
+          <div
+            className={`text-sm h-3 w-16 rounded animate-pulse ${
+              theme === "light" ? "bg-gray-200" : "bg-gray-600"
+            }`}
+          />
+          <div
+            className={`bg-gray-200 w-20 h-8 rounded animate-pulse ${
+              theme === "light" ? "bg-gray-200" : "bg-gray-600"
+            }`}
+          />
         </div>
       ))}
     </div>
