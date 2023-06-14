@@ -1,51 +1,36 @@
-"use client";
+"use client"
 import { FC } from "react";
-import classNames from "classnames";
-import useTelegram from "../hooks/useTelegram";
+import Link from "next/link";
 
-const TabNavigation: FC<{
-  onTabClick: (tab: string) => void;
-  selectedTab: string;
-}> = ({ onTabClick, selectedTab }) => {
-  const handleClick = (tab: string) => {
-    onTabClick(tab);
-  };
 
-  const telegram = useTelegram();
-  const theme = telegram?.WebApp.colorScheme;
-
+const TabsNavigation: FC<{path: string}> = ({path}) => {
   return (
-    <div className="flex justify-center mb-4 -ml-40">
-      <button
-        className={classNames(
-          "flex w-20 h-10 items-center justify-center ",
-          selectedTab === "projects" &&
-            `border-b-2 ${
-              theme === "light"
-                ? "border-smart text-smart"
-                : "border-funny text-funny"
-            }`
-        )}
-        onClick={() => handleClick("projects")}
-      >
-        Nodes
-      </button>
-      <button
-        className={classNames(
-          "flex w-20 h-10 items-center justify-center ",
-          selectedTab === "new" &&
-            `border-b-2 ${
-              theme === "light"
-                ? "border-smart text-smart"
-                : "border-funny text-funny"
-            }`
-        )}
-        onClick={() => handleClick("new")}
-      >
-        Testnets
-      </button>
-    </div>
+    <div className="flex justify-center mb-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-red-950">
+        <ul
+          className="w-[320px] flex flex-wrap -mb-px text-sm font-medium text-center"
+          id="myTab"
+          data-tabs-toggle="#myTabContent"
+          role="tablist"
+        >
+          <li className="mr-2" role="presentation">
+            <Link
+              href="/"
+              className={`inline-block p-4 rounded-t-lg ${path === "/" ? "border-b-2 border-solid" : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"}`}
+            >
+              Nodes
+            </Link>
+          </li>
+          <li className="mr-2" role="presentation">
+            <Link
+              href="/testnets"
+              className={`inline-block p-4 border-b-2 rounded-t-lg  ${path === "/testnets" ? "border-solid" : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"}`}
+            >
+              Testnets
+            </Link>
+          </li>
+        </ul>
+      </div>
   );
 };
 
-export default TabNavigation;
+export default TabsNavigation;
