@@ -46,18 +46,13 @@ const Items: FC<{
 
   return (
     <div
-      className="flex flex-col h-screen"
-      style={{
-        backgroundColor: telegram?.WebApp.themeParams.secondary_bg_color,
-      }}
+      className="flex flex-col h-screen bg-tg_secondary_bg_color"
     >
       <div
-        className="flex justify-between py-5 px-6"
-        style={{ backgroundColor: telegram?.WebApp.themeParams?.bg_color }}
+        className="flex justify-between py-5 px-6 bg-tg_bg_color"
       >
         <span
-          className="font-bold"
-          style={{ color: telegram?.WebApp.themeParams?.text_color }}
+          className="font-bold text-tg_text_color"
         >
           YOUR ORDER
         </span>
@@ -78,16 +73,11 @@ const Items: FC<{
       ))}
       <div className="pt-3 flex flex-col h-full">
         <input
-          className="px-6 py-3 text-base focus:outline-none"
+          className="px-6 py-3 text-base focus:outline-none text-tg_text_color bg-tg_bg_color"
           placeholder="Add comment..."
-          style={{
-            color: telegram?.WebApp.themeParams?.text_color,
-            backgroundColor: telegram?.WebApp.themeParams?.bg_color,
-          }}
         />
         <span
-          className="px-6 pt-3 pb-6 text-sm"
-          style={{ color: telegram?.WebApp.themeParams?.hint_color }}
+          className="px-6 pt-3 pb-6 text-sm text-tg_hint_color"
         >
           Any special requests, details, final wishes etc.
         </span>

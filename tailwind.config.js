@@ -10,11 +10,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        smart: "#3498da",
-        kind: "#0A2463",
-        funny: "#174F78",
-        lucky: "#061538",
+        smart: "#777778",
         active: "#33b445",
+        tg_color_scheme: "var(--tg-color-scheme)",
+        tg_bg_color: "var(--tg-theme-bg-color)",
+        tg_button_color: "var(--tg-theme-button-color)",
+        tg_button_text_color: "var(--tg-theme-button-text-color)",
+        tg_hint_color: "var(--tg-theme-hint-color)",
+        tg_link_color: "var(--tg-theme-link-color)",
+        tg_secondary_bg_color: "var(--tg-theme-secondary-bg-color)",
+        tg_text_color: "var(--tg-theme-text-color)"
       },
       keyframes: {
         badgeShow: {
