@@ -1,7 +1,6 @@
 "use client";
 import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import useTelegram from "@/app/hooks/useTelegram";
 
 type Animations =
   | "animate-badgeHide"
@@ -38,10 +37,6 @@ const Badge: FC<{
   amount: number;
   name: string;
 }> = ({ amount, name }) => {
-  const telegram = useTelegram();
-  const theme = telegram?.WebApp.colorScheme;
-
-
   const prevAmountRef = useRef(amount);
   const [animation, setAnimation] = useState<Animations | undefined>(
     amount > 0 ? "animate-badgeShow" : "animate-badgeHide"
@@ -58,8 +53,7 @@ const Badge: FC<{
         <div
           className={classNames(
             animation,
-            theme === "light" ? "bg-smart" : "bg-funny",
-            "flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0"
+            "flex absolute top-0 right-0 my-[4px] mx-[6px] font-bold text-white h-[22px] min-w-[22px] rounded-[11px] justify-center items-center transform scale-0 bg-tg_button_color"
           )}
         >
           {amount}
