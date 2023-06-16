@@ -14,7 +14,7 @@ const ListItemButtons: FC<{
       variant="secondary"
       onClick={onRemove}
       className={classNames(
-        "`w-9 text-4xl font-sans h-8 flex items-center justify-center",
+        "w-9 text-4xl h-8 flex items-center justify-center",
         amount === 0 && "hidden"
       )}
     >
@@ -28,7 +28,7 @@ const ListItemButtons: FC<{
           variant="primary"
           className={classNames(
             state,
-            "add_button absolute right-0 font-sans text-sm h-8 flex items-center justify-center",
+            "add_button absolute right-0 h-8 flex items-center justify-center",
             amount === 0 ? "w-20 h-8 font-bold" : "w-9 text-3xl"
           )}
         >

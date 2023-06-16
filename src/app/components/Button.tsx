@@ -8,11 +8,9 @@ const Button: FC<
     variant?: "primary" | "secondary";
   }>
 > = ({ className, onClick, children, variant }) => {
-  const theme = "light";
-
   const variantDictionary = {
-    primary: theme === "light" ? "bg-smart" : "bg-funny",
-    secondary: theme === "light" ? "bg-kind" : "bg-lucky",
+    primary: "bg-tg_button_color",
+    secondary: "bg-smart",
     "": undefined,
   };
   return (
