@@ -1,10 +1,10 @@
 "use client";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import useTelegram from "../../hooks/useTelegram";
-import { Project } from "../../types";
-import { useStoreContext } from "../../context/store";
+import useTelegram from "@/app/hooks/useTelegram";
+import { Project } from "@/app/types";
+import { useStoreContext } from "@/app/context/store";
 import Item from "./Item";
 
 const Items: FC<{
@@ -45,17 +45,9 @@ const Items: FC<{
   }, [storeItems, telegram]);
 
   return (
-    <div
-      className="flex flex-col h-screen bg-tg_secondary_bg_color"
-    >
-      <div
-        className="flex justify-between py-5 px-6 bg-tg_bg_color"
-      >
-        <span
-          className="font-bold text-tg_text_color"
-        >
-          YOUR ORDER
-        </span>
+    <div className="flex flex-col h-screen bg-tg_secondary_bg_color">
+      <div className="flex justify-between py-5 px-6 bg-tg_bg_color">
+        <span className="font-bold text-tg_text_color">YOUR ORDER</span>
         <span className=" text-active">
           <Link href="/" onClick={router.back}>
             Edit
@@ -76,9 +68,7 @@ const Items: FC<{
           className="px-6 py-3 text-base focus:outline-none text-tg_text_color bg-tg_bg_color"
           placeholder="Add comment..."
         />
-        <span
-          className="px-6 pt-3 pb-6 text-sm text-tg_hint_color"
-        >
+        <span className="px-6 pt-3 pb-6 text-sm text-tg_hint_color">
           Any special requests, details, final wishes etc.
         </span>
       </div>

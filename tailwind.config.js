@@ -12,14 +12,14 @@ module.exports = {
       colors: {
         smart: "#777778",
         active: "#33b445",
-        tg_color_scheme: "var(--tg-color-scheme)",
-        tg_bg_color: "var(--tg-theme-bg-color)",
-        tg_button_color: "var(--tg-theme-button-color)",
-        tg_button_text_color: "var(--tg-theme-button-text-color)",
-        tg_hint_color: "var(--tg-theme-hint-color)",
-        tg_link_color: "var(--tg-theme-link-color)",
-        tg_secondary_bg_color: "var(--tg-theme-secondary-bg-color)",
-        tg_text_color: "var(--tg-theme-text-color)"
+        tg_color_scheme: "var(--tg-color-scheme, light)",
+        tg_bg_color: "var(--tg-theme-bg-color, #ffffff)",
+        tg_button_color: "var(--tg-theme-button-color, #3390ec)",
+        tg_button_text_color: "var(--tg-theme-button-text-color, #ffffff)",
+        tg_hint_color: "var(--tg-theme-hint-color, #707579)",
+        tg_link_color: "var(--tg-theme-link-color, #00488f)",
+        tg_secondary_bg_color: "var(--tg-theme-secondary-bg-color, #f4f4f5)",
+        tg_text_color: "var(--tg-theme-text-color, #000000)",
       },
       keyframes: {
         badgeShow: {

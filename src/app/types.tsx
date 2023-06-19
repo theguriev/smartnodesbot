@@ -59,3 +59,10 @@ export type ProjectResponse = {
   data: Project[];
   totalCount: number;
 };
+
+export type InitDataObject = {
+  auth_date: string;
+  hash: string;
+  query_id: string;
+  user: string;
+};

@@ -1,7 +1,7 @@
 import { ProjectResponse } from "../types";
 
 const fetchProjects = async ({
-  limit = "10",
+  limit = "100",
   offset = "0",
   status = "ACTIVE",
 }) => {
