@@ -14,8 +14,7 @@ const ListItem: FC<
     amount: number;
   }
 > = ({ onAdd, onRemove, amount, ...project }) => {
-  console.log("project.imageUrl", project.imageUrl);
-  const [hasError, setHasError] = useState(project.imageUrl === null);
+  const [hasError, setHasError] = useState(!project.imageUrl);
   const handleAddClick = () => {
     onAdd(project.id);
   };
