@@ -1,12 +1,12 @@
 import { ProjectResponse } from "../types";
 
-const fetchProjects = async ({
+const fetchTestnets = async ({
   limit = "100",
   offset = "0",
   status = "ACTIVE",
 }) => {
   const response = await fetch(
-    `https://smart-nodes-api-stg.azurewebsites.net/api/v1/projects?${new URLSearchParams(
+    `https://smart-nodes-api-stg.azurewebsites.net/api/v1/test-net?${new URLSearchParams(
       { limit, offset, status }
     )}`
   );
@@ -14,4 +14,4 @@ const fetchProjects = async ({
   return data;
 };
 
-export default fetchProjects;
+export default fetchTestnets;

@@ -3,12 +3,22 @@ export {};
 declare namespace TelegramWebApps {
   interface SDK {
     WebApp: WebApp;
+    Utils: Utils;
   }
 
   /**
    * Available app events.
    */
   type EventType = "themeChanged" | "viewportChanged" | "mainButtonClicked";
+
+  interface Utils {
+    urlParseQueryString<
+      T extends Record<string, string> = Record<string, string>
+    >(
+      url: string
+    ): T;
+    urlSafeDecode(encoded: string): string;
+  }
 
   interface WebApp {
     /**

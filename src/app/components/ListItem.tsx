@@ -1,6 +1,6 @@
 "use client";
 import "./ListItemAnimation.css";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Badge from "./Badge";
 import Title from "./Title";
@@ -14,6 +14,7 @@ const ListItem: FC<
     amount: number;
   }
 > = ({ onAdd, onRemove, amount, ...project }) => {
+  const [hasError, setHasError] = useState(!project.imageUrl);
   const handleAddClick = () => {
     onAdd(project.id);
   };
@@ -22,17 +23,27 @@ const ListItem: FC<
     onRemove(project.id);
   };
 
+  const handleImageError = () => {
+    setHasError(true);
+  };
+
   return (
     <div className="relative w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
       <Badge amount={amount} name={project.name} />
       <div>
-        <Image
-          className="rounded-full"
-          src="/lava.webp"
-          width={74}
-          height={74}
-          alt="failed to load"
-        />
+        {hasError && (
+          <div className="h-20 w-20 rounded-full animate-pulse bg-tg_secondary_bg_color" />
+        )}
+        {!hasError && (
+          <Image
+            className="rounded-full"
+            src={project.imageUrl}
+            width={74}
+            height={74}
+            onError={handleImageError}
+            alt={project.name}
+          />
+        )}
       </div>
       <Title price={project.monthlyPrice} title={project.name} />
       <ListItemButtons
