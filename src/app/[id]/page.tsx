@@ -1,4 +1,13 @@
+import fetchProject from "../api/fetchProject";
+import ProjectItem from "./components/ProjectItem";
 
-export default function ItemPage({ params }: { params: { id: number } }) {
-    return <div>My id: {params.id}</div>
-  }
+const ItemPage = async ({ params }: { params: { id: number } }) => {
+  const id = params.id;
+  const response = await fetchProject({
+    id: id,
+  });
+
+  return <ProjectItem project={response}/>;
+};
+
+export default ItemPage;
