@@ -42,6 +42,11 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
     window.Telegram.WebApp.MainButton.show();
   }, [store]);
 
+  const handleItemClick = (id: number) => {
+    router.push(`/${id}`);
+    console.log("click")
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-start">
@@ -53,6 +58,7 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
               onAdd={add}
               onRemove={remove}
               amount={store.get(project.id) || 0}
+              onItemClick={handleItemClick}
             />
           ))
         ) : (

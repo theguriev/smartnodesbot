@@ -11,9 +11,10 @@ const ListItem: FC<
   Project & {
     onAdd: (id: number) => void;
     onRemove: (id: number) => void;
+    onItemClick: (id: number) => void
     amount: number;
   }
-> = ({ onAdd, onRemove, amount, ...project }) => {
+> = ({ onAdd, onRemove, onItemClick, amount, ...project }) => {
   const [hasError, setHasError] = useState(!project.imageUrl);
   const handleAddClick = () => {
     onAdd(project.id);
@@ -32,20 +33,21 @@ const ListItem: FC<
       <Badge amount={amount} name={project.name} />
       <div>
         {hasError && (
-          <div className="h-20 w-20 rounded-full animate-pulse bg-tg_secondary_bg_color" />
+          <div className="h-20 w-20 rounded-full animate-pulse bg-tg_secondary_bg_color cursor-pointer" onClick={() => onItemClick(project.id)}/>
         )}
         {!hasError && (
           <Image
-            className="rounded-full"
+            className="rounded-full cursor-pointer"
             src={project.imageUrl}
             width={74}
             height={74}
             onError={handleImageError}
             alt={project.name}
+            onClick={() => onItemClick(project.id)}
           />
         )}
       </div>
-      <Title price={project.monthlyPrice} title={project.name} />
+      <Title price={project.monthlyPrice} title={project.name} onClick={() => onItemClick(project.id)} />
       <ListItemButtons
         onAdd={handleAddClick}
         onRemove={handleRemoveClick}
