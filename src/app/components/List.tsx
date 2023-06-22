@@ -5,10 +5,12 @@ import ListItem from "./ListItem";
 import { Project } from "../types";
 import { useStoreContext } from "../context/store";
 import Skeleton from "@/app/components/Skeleton";
+import { usePathname } from "next/navigation";
 
 const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
   const { store, add, remove } = useStoreContext();
 
+  const pathname = usePathname();
   const router = useRouter();
 
   const handleMainButtonClick = useCallback(() => {
@@ -43,8 +45,7 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
   }, [store]);
 
   const handleItemClick = (id: number) => {
-    router.push(`/${id}`);
-    console.log("click")
+    pathname === "/" ? router.push(`/${id}`) : router.push(`/testnets/${id}`);
   };
 
   return (

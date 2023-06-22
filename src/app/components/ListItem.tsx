@@ -11,7 +11,7 @@ const ListItem: FC<
   Project & {
     onAdd: (id: number) => void;
     onRemove: (id: number) => void;
-    onItemClick: (id: number) => void
+    onItemClick: (id: number) => void;
     amount: number;
   }
 > = ({ onAdd, onRemove, onItemClick, amount, ...project }) => {
