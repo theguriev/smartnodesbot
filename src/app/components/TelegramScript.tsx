@@ -18,8 +18,7 @@ const TelegramScript: FC<PropsWithChildren> = ({ children }) => {
         onLoad={handleOnLoad}
         defer
       />
-      {loaded && children}
-      {!loaded && <Skeleton />}
+      {loaded ? children : <Skeleton />}
     </>
   );
 };
