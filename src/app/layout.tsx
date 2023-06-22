@@ -15,8 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
-        <TelegramScript />
-        <StoreContextProvider>{children}</StoreContextProvider>
+        <TelegramScript>
+          <StoreContextProvider>{children}</StoreContextProvider>
+        </TelegramScript>
       </body>
     </html>
   );
