@@ -4,7 +4,7 @@ const fetchProjects = async ({
   limit = "100",
   offset = "0",
   status = "ACTIVE",
-}) => {
+}): Promise<ProjectResponse> => {
   const response = await fetch(
     `https://smart-nodes-api-stg.azurewebsites.net/api/v1/projects?${new URLSearchParams(
       { limit, offset, status }
