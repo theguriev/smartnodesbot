@@ -12,10 +12,7 @@ const Item: FC<
 > = ({ amount, name, blockQuoteEn, blockQuoteRu, monthlyPrice }) => {
   const totalPrice = amount * (monthlyPrice || 0);
   const locale = getLocale();
-  console.log({
-    blockQuoteRu,
-    blockQuoteEn,
-  });
+
   return (
     <div className="flex flex-row px-6 py-2 text-sm bg-tg_bg_color">
       <div className="flex items-center">
