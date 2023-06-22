@@ -40,14 +40,16 @@ const Items: FC<{
       0
     );
     telegram?.WebApp.MainButton.setParams({
-      text: `${t("PAY")} ${sum}$`,
+      text: `${t("Pay").toUpperCase()} ${sum}$`,
     });
   }, [storeItems, telegram]);
 
   return (
     <div className="flex flex-col h-screen bg-tg_secondary_bg_color">
       <div className="flex justify-between py-5 px-6 bg-tg_bg_color">
-        <span className="font-bold text-tg_text_color">{t("YOUR ORDER")}</span>
+        <span className="font-bold text-tg_text_color uppercase">
+          {t("Your order")}
+        </span>
         <span className=" text-active">
           <Link href="/" onClick={router.back}>
             {t("Edit")}

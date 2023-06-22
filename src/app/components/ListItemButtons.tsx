@@ -36,8 +36,8 @@ const ListItemButtons: FC<{
           <span className={classNames(amount === 0 && "hidden", "mt-[-4px]")}>
             +
           </span>
-          <span className={classNames(amount !== 0 && "hidden")}>
-            {t("ADD")}
+          <span className={classNames(amount !== 0 && "hidden", "uppercase")}>
+            {t("Add")}
           </span>
         </Button>
       )}

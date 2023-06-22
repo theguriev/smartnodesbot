@@ -37,7 +37,7 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
       return;
     }
     window.Telegram.WebApp.MainButton.setParams({
-      text: t("VIEW ORDER"),
+      text: t("View order").toUpperCase(),
       color: "#33b445",
     });
     window.Telegram.WebApp.MainButton.show();

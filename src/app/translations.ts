@@ -2,25 +2,25 @@ const translations = {
   en: {
     Nodes: "Nodes",
     Testnets: "Testnets",
-    "VIEW ORDER": "VIEW ORDER",
-    PAY: "PAY",
-    "YOUR ORDER": "YOUR ORDER",
+    "View order": "View order",
+    Pay: "Pay",
+    "Your order": "Your order",
     Edit: "Edit",
     "Any special requests, details, final wishes etc.":
       "Any special requests, details, final wishes etc.",
-    ADD: "ADD",
+    Add: "Add",
     "Add comment": "Add comment",
   },
   ru: {
     Nodes: "Узлы",
     Testnets: "Тестовые сети",
-    "VIEW ORDER": "ПОСМОТРЕТЬ ЗАКАЗ",
-    PAY: "ОПЛАТИТЬ",
-    "YOUR ORDER": "ВАШ ЗАКАЗ",
+    "View order": "Посмотреть заказ",
+    Pay: "Оплатить",
+    "Your order": "Ваш заказ",
     Edit: "Изменить",
     "Any special requests, details, final wishes etc.":
       "Любые особые пожелания, детали, последние пожелания и т.д.",
-    ADD: "ДОБАВИТЬ",
+    Add: "ДОБАВИТЬ",
     "Add comment": "Добавить комментарий",
   },
 } as const;
