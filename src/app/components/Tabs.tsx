@@ -14,7 +14,7 @@ const tabs = [
   },
 ];
 
-const TabsNavigation: FC<{ path: string }> = ({ path }) => (
+const Tabs: FC<{ path: string }> = ({ path }) => (
   <div className="flex justify-center mb-4 border-b bg-tg_secondary_bg_color">
     <ul
       className="w-[320px] flex flex-wrap -mb-px text-sm font-medium text-center gap-4"
@@ -29,4 +29,4 @@ const TabsNavigation: FC<{ path: string }> = ({ path }) => (
   </div>
 );
 
-export default TabsNavigation;
+export default Tabs;
