@@ -27,7 +27,7 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
       telegram?.WebApp.BackButton.offClick(router.back);
     };
   }, [telegram, router]);
-  
+
   return (
     <div className="flex justify-center mt-4">
       <div className="max-w-[360px] flex flex-col items-center gap-2">
@@ -50,7 +50,9 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
         <div className="text-sm text-tg_hint_color">
           <Link href={project.url}>{project.url}</Link>
         </div>
-        <div className="text-sm text-justify">{project.descriptionEn}</div>
+        <div className="text-sm text-justify text-tg_text_color">
+          {project.descriptionEn}
+        </div>
         <div className="text-sm text-tg_hint_color">
           {project.discord} {project.twitter} {project.telegram}{" "}
           {project.reddit} {project.medium} {project.github}
