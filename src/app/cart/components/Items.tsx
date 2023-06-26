@@ -26,7 +26,7 @@ const Items: FC<{
 
   useEffect(() => {
     telegram?.WebApp.BackButton.show();
-    telegram?.WebApp.BackButton.onClick(() => router.back);
+    telegram?.WebApp.BackButton.onClick(() => router.push("/"));
 
     return () => {
       telegram?.WebApp.BackButton.offClick(router.back);
