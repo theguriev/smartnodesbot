@@ -19,8 +19,8 @@ const Home = () => {
             }
         >
             <div className="flex justify-center">
-                <div className="max-w-[360px] flex justify-center">
-                    {/* @ts-expect-error Server Component */}
+                <div className="w-[360px] flex justify-center">
+                    {/* @ts-expect-error Server Component */} 
                     <Projects />
                 </div>
             </div>

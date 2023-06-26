@@ -20,7 +20,7 @@ const TestNets = () => {
         }
       >
         <div className="flex justify-center">
-          <div className="max-w-[360px] flex justify-center">
+          <div className="w-[360px] flex">
             {/* @ts-expect-error Server Component */}
             <Testnets />
           </div>
