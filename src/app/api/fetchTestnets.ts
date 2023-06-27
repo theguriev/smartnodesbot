@@ -5,13 +5,23 @@ const fetchTestnets = async ({
   offset = "0",
   status = "ACTIVE",
 }): Promise<ProjectResponse> => {
-  const response = await fetch(
-    `https://smart-nodes-api-stg.azurewebsites.net/api/v1/test-net?${new URLSearchParams(
-      { limit, offset, status }
-    )}`
-  );
-  const data: ProjectResponse = await response.json();
-  return data;
+  try {
+    const response: Response = await fetch(
+      `${process.env.baseUrl}/api/v1/test-net?${new URLSearchParams({
+        limit,
+        offset,
+        status,
+      })}`
+    );
+    if (!response.ok) {
+      throw new Error(`Request failed with status code ${response.status}`);
+    }
+    const data: ProjectResponse = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching testnets:", error);
+    throw error;
+  }
 };
 
 export default fetchTestnets;

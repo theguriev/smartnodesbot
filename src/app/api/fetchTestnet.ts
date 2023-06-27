@@ -3,7 +3,7 @@ import { Project } from "../types";
 const fetchTestnet = async ({ id }: { id: number }): Promise<Project> => {
   try {
     const response = await fetch(
-      `https://smart-nodes-api-stg.azurewebsites.net/api/v1/test-net/${id}`
+      `${process.env.baseUrl}/api/v1/test-net/${id}`
     );
     if (!response.ok) {
       throw new Error(`Request failed with status code ${response.status}`);
