@@ -1,10 +1,16 @@
 "use client";
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, ReactElement } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/app/types";
 import useTelegram from "@/app/hooks/useTelegram";
+import { DiscordIcon } from "./DiscordIcon";
+import { GithubIcon } from "./GithubIcon";
+import { MediumIcon } from "./MediumIcon";
+import { RedditIcon } from "./RedditIcon";
+import { TelegramIcon } from "./TelegramIcon";
+import { TwitterIcon } from "./TwitterIcon";
 
 const ProjectItem: FC<{ project: Project }> = ({ project }) => {
   const [hasError, setHasError] = useState(!project.imageUrl);
@@ -28,6 +34,54 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
     };
   }, [telegram, router]);
 
+  const renderIcons = () => {
+    const icons: ReactElement[] = [];
+    if (project.discord) {
+      icons.push(
+        <Link key="discord" href={project.discord}>
+          <DiscordIcon />
+        </Link>
+      );
+    }
+    if (project.github) {
+      icons.push(
+        <Link key="github" href={project.github}>
+          <GithubIcon />
+        </Link>
+      );
+    }
+    if (project.medium) {
+      icons.push(
+        <Link key="medium" href={project.medium}>
+          <MediumIcon />
+        </Link>
+      );
+    }
+    if (project.reddit) {
+      icons.push(
+        <Link key="reddit" href={project.reddit}>
+          <RedditIcon />
+        </Link>
+      );
+    }
+    if (project.telegram) {
+      icons.push(
+        <Link key="telegram" href={project.telegram}>
+          <TelegramIcon />
+        </Link>
+      );
+    }
+    if (project.twitter) {
+      icons.push(
+        <Link key="twitter" href={project.twitter}>
+          <TwitterIcon />
+        </Link>
+      );
+    }
+
+    return icons;
+  };
+
   return (
     <div className="flex justify-center mt-4">
       <div className="max-w-[360px] flex flex-col items-center gap-2">
@@ -46,16 +100,17 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
             />
           )}
         </div>
-        <div className="font-bold text-tg_text_color">{project.name}</div>
+        <div className="font-bold text-tg_text_color text-lg">{project.name}</div>
+        <div>{project.monthlyPrice}$ / month</div>
         <div className="text-sm text-tg_hint_color">
           <Link href={project.url}>{project.url}</Link>
         </div>
+
         <div className="text-sm text-justify text-tg_text_color">
           {project.descriptionEn}
         </div>
-        <div className="text-sm text-tg_hint_color">
-          {project.discord} {project.twitter} {project.telegram}{" "}
-          {project.reddit} {project.medium} {project.github}
+        <div className="text-sm text-tg_hint_color flex flex-row gap-3 mt-3">
+          {renderIcons()}
         </div>
       </div>
     </div>
