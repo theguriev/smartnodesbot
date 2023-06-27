@@ -1,32 +1,27 @@
-"use client";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import Testnets from "./components/Testnets";
 import Skeleton from "../components/Skeleton";
 import TabsNavigation from "../components/TabsNavigation";
-import { usePathname } from "next/navigation";
 
-const TestNets = () => {
-  const pathname = usePathname();
-  return (
-    <>
-      <TabsNavigation path={pathname} />
-      <Suspense
-        fallback={
-          <div className="flex justify-center">
-            <div className="max-w-[360px] flex justify-center">
-              <Skeleton />
-            </div>
-          </div>
-        }
-      >
+const TestNets = () => (
+  <>
+    <TabsNavigation />
+    <Suspense
+      fallback={
         <div className="flex justify-center">
-          <div className="w-[360px] flex">
-            <Testnets />
+          <div className="max-w-[360px] flex justify-center">
+            <Skeleton />
           </div>
         </div>
-      </Suspense>
-    </>
-  );
-};
+      }
+    >
+      <div className="flex justify-center">
+        <div className="w-[360px] flex">
+          <Testnets />
+        </div>
+      </div>
+    </Suspense>
+  </>
+);
 
 export default TestNets;
