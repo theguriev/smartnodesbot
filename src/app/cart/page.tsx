@@ -13,7 +13,6 @@ const CartHome = () => {
         </div>
       }
     >
-      {/* @ts-expect-error Server Component */}
       <Projects />
     </Suspense>
   );
