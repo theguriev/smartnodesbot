@@ -1,6 +1,5 @@
 import { InitDataObject } from "@/app/types";
-import useTelegram from "./useTelegram";
-import parseJSON from "@/app/utils/parseJSON";
+import parseJSON from "./parseJSON";
 
 type UserData = {
   id: number;
@@ -10,9 +9,9 @@ type UserData = {
   language_code: string;
 };
 
-const useInitData = () => {
-  const telegram = useTelegram();
-  const initData = telegram!.Utils.urlParseQueryString<InitDataObject>(
+const getInitData = () => {
+  const telegram = window.Telegram;
+  const initData = telegram.Utils.urlParseQueryString<InitDataObject>(
     telegram!.Utils.urlSafeDecode(telegram!.WebApp.initData)
   );
   const userData = parseJSON<UserData, undefined>(initData.user, undefined);
@@ -22,4 +21,4 @@ const useInitData = () => {
   };
 };
 
-export default useInitData;
+export default getInitData;

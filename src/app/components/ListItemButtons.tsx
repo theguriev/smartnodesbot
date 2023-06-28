@@ -3,6 +3,7 @@ import Button from "./Button";
 import Transition from "react-transition-group/Transition";
 import classNames from "classnames";
 import "./ListItemAnimation.css";
+import t from "@/app/utils/t";
 
 const ListItemButtons: FC<{
   onRemove?: MouseEventHandler<HTMLButtonElement>;
@@ -35,7 +36,9 @@ const ListItemButtons: FC<{
           <span className={classNames(amount === 0 && "hidden", "mt-[-4px]")}>
             +
           </span>
-          <span className={classNames(amount !== 0 && "hidden")}>ADD</span>
+          <span className={classNames(amount !== 0 && "hidden", "uppercase")}>
+            {t("Add")}
+          </span>
         </Button>
       )}
     </Transition>

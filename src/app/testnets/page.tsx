@@ -1,27 +1,29 @@
 import { Suspense } from "react";
 import Testnets from "./components/Testnets";
 import Skeleton from "../components/Skeleton";
-import TabsNavigation from "../components/TabsNavigation";
+import Tabs from "../components/Tabs";
 
-const TestNets = () => (
-  <>
-    <TabsNavigation />
-    <Suspense
-      fallback={
+const TestNets = () => {
+  return (
+    <>
+      <Tabs />
+      <Suspense
+        fallback={
+          <div className="flex justify-center">
+            <div className="max-w-[360px] flex justify-center">
+              <Skeleton />
+            </div>
+          </div>
+        }
+      >
         <div className="flex justify-center">
           <div className="max-w-[360px] flex justify-center">
-            <Skeleton />
+            <Testnets />
           </div>
         </div>
-      }
-    >
-      <div className="flex justify-center">
-        <div className="w-[360px] flex">
-          <Testnets />
-        </div>
-      </div>
-    </Suspense>
-  </>
-);
+      </Suspense>
+    </>
+  );
+};
 
 export default TestNets;

@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import Projects from "./components/Projects";
 import Skeleton from "./components/Skeleton";
-import TabsNavigation from "./components/TabsNavigation";
+import Tabs from "./components/Tabs";
 
 const Home = () => {
   return (
     <>
-      <TabsNavigation />
+      <Tabs />
       <Suspense
         fallback={
           <div className="flex justify-center">
@@ -17,7 +17,7 @@ const Home = () => {
         }
       >
         <div className="flex justify-center">
-          <div className="w-[360px] flex justify-center">
+        <div className="w-[360px] flex justify-center">
             <Projects />
           </div>
         </div>

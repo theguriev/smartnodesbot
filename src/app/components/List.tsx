@@ -6,6 +6,7 @@ import { Project } from "../types";
 import { useStoreContext } from "../context/store";
 import Skeleton from "@/app/components/Skeleton";
 import { usePathname } from "next/navigation";
+import t from "@/app/utils/t";
 
 const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
   const { store, add, remove } = useStoreContext();
@@ -38,7 +39,7 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
       return;
     }
     window.Telegram.WebApp.MainButton.setParams({
-      text: "VIEW ORDER",
+      text: t("View order").toUpperCase(),
       color: "#33b445",
     });
     window.Telegram.WebApp.MainButton.show();
