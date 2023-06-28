@@ -104,13 +104,15 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
         <div className="font-bold text-tg_text_color text-lg">
           {project.name}
         </div>
-        <div>{project.monthlyPrice}$ / month</div>
+        <div className="text-tg_text_color">
+          {project.monthlyPrice}$ / month
+        </div>
         <div className="text-sm text-tg_hint_color">
           <Link href={project.url}>{project.url}</Link>
         </div>
 
         <div className="text-sm text-justify text-tg_text_color">
-        {locale === "ru" ? project.descriptionRu : project.descriptionEn}
+          {locale === "ru" ? project.descriptionRu : project.descriptionEn}
         </div>
         <div className="text-sm text-tg_hint_color flex flex-row gap-3 mt-3">
           {renderIcons()}
