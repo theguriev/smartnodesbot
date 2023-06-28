@@ -5,11 +5,13 @@ import ListItem from "./ListItem";
 import { Project } from "../types";
 import { useStoreContext } from "../context/store";
 import Skeleton from "@/app/components/Skeleton";
+import { usePathname } from "next/navigation";
 import t from "@/app/utils/t";
 
 const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
   const { store, add, remove } = useStoreContext();
 
+  const pathname = usePathname();
   const router = useRouter();
 
   const handleMainButtonClick = useCallback(() => {
@@ -43,6 +45,14 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
     window.Telegram.WebApp.MainButton.show();
   }, [store]);
 
+  const handleItemClick = (id: number) => {
+    if (pathname === "/") {
+      router.push(`/${id}`);
+    } else {
+      router.push(`${pathname}/${id}`);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-start">
@@ -54,6 +64,7 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
               onAdd={add}
               onRemove={remove}
               amount={store.get(project.id) || 0}
+              onItemClick={handleItemClick}
             />
           ))
         ) : (

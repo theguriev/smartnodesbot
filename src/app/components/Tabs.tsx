@@ -2,8 +2,10 @@
 import { FC } from "react";
 import t from "@/app/utils/t";
 import Tab from "./Tab";
+import { usePathname } from "next/navigation";
 
-const Tabs: FC<{ path: string }> = ({ path }) => {
+const Tabs: FC = () => {
+  const path = usePathname();
   const tabs = [
     {
       href: "/",

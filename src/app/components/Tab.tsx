@@ -1,6 +1,5 @@
 import { FC } from "react";
 import Link from "next/link";
-import t from "@/app/utils/t";
 import classNames from "classnames";
 
 const Tab: FC<{ active: boolean; href: string; label: string }> = ({

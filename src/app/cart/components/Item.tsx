@@ -1,22 +1,38 @@
-/* eslint-disable @next/next/no-img-element */
-import { FC } from "react";
+"useClient";
+import { FC, useState } from "react";
 import { Project } from "@/app/types";
 import getLocale from "@/app/utils/getLocale";
 
 const Item: FC<
   Partial<
-    Pick<Project, "name" | "blockQuoteEn" | "blockQuoteRu" | "monthlyPrice">
+    
+    Pick<Project, "name" | "blockQuoteEn" | "blockQuoteRu" | "monthlyPrice" | "imageUrl">
+  
   > & {
     amount: number;
   }
-> = ({ amount, name, blockQuoteEn, blockQuoteRu, monthlyPrice }) => {
+> = ({ amount, name, blockQuoteEn, blockQuoteRu, monthlyPrice, imageUrl }) => {
   const totalPrice = amount * (monthlyPrice || 0);
+  const [hasError, setHasError] = useState(!imageUrl);
+  const handleImageError = () => {
+    setHasError(true);
+  };
   const locale = getLocale();
 
   return (
     <div className="flex flex-row px-6 py-2 text-sm bg-tg_bg_color">
-      <div className="flex items-center">
-        <img src="/lava.webp" className="w-10 h-10 mr-3" alt="can't load" />
+      <div>
+        {hasError && (
+          <div className="w-10 h-10 mr-3 rounded-full animate-pulse bg-tg_secondary_bg_color" />
+        )}
+        {!hasError && (
+          <img
+            className="rounded-full cursor-pointer w-10 h-10 mr-3"
+            src={imageUrl}
+            onError={handleImageError}
+            alt="failed"
+          />
+        )}
       </div>
       <div className="w-full flex justify-between">
         <div className="flex flex-col">
