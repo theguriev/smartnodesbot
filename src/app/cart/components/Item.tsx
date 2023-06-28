@@ -12,12 +12,13 @@ const Item: FC<
     amount: number;
   }
 > = ({ amount, name, blockQuoteEn, blockQuoteRu, monthlyPrice, imageUrl }) => {
+  const locale = getLocale();
   const totalPrice = amount * (monthlyPrice || 0);
   const [hasError, setHasError] = useState(!imageUrl);
+  
   const handleImageError = () => {
     setHasError(true);
   };
-  const locale = getLocale();
 
   return (
     <div className="flex flex-row px-6 py-2 text-sm bg-tg_bg_color">
