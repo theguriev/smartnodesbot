@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/app/types";
-import useTelegram from "@/app/hooks/useTelegram";
+
 import { DiscordIcon } from "./DiscordIcon";
 import { GithubIcon } from "./GithubIcon";
 import { MediumIcon } from "./MediumIcon";
@@ -18,7 +18,7 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
     setHasError(true);
   };
 
-  const telegram = useTelegram();
+  const telegram = window.Telegram;
   const router = useRouter();
   const pathname = usePathname();
 
@@ -100,7 +100,9 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
             />
           )}
         </div>
-        <div className="font-bold text-tg_text_color text-lg">{project.name}</div>
+        <div className="font-bold text-tg_text_color text-lg">
+          {project.name}
+        </div>
         <div>{project.monthlyPrice}$ / month</div>
         <div className="text-sm text-tg_hint_color">
           <Link href={project.url}>{project.url}</Link>
