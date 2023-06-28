@@ -18,23 +18,31 @@ const postBulkPurchase = async ({
   }>;
   telegram: string;
 }) => {
-  const response = await fetch(
-    "https://smart-nodes-api-stg.azurewebsites.net/api/v1/projects/bulk-purchase",
-    {
-      body: JSON.stringify({
-        email,
-        phone,
-        firstName,
-        lastName,
-        shoppingCart,
-        telegram,
-      }),
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
+  try {
+    const response = await fetch(
+      `${process.env.baseUrl}/api/v1/projects/bulk-purchase`,
+      {
+        body: JSON.stringify({
+          email,
+          phone,
+          firstName,
+          lastName,
+          shoppingCart,
+          telegram,
+        }),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Request failed with status code ${response.status}`);
     }
-  );
-  const data: ProjectResponse = await response.json();
-  return data;
+    const data: ProjectResponse = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching testnets:", error);
+    throw error;
+  }
 };
 
 export default postBulkPurchase;

@@ -62,6 +62,9 @@ const Items: FC<{
     };
 
     telegram!.WebApp.MainButton.onClick(handleMainButtonClick);
+    return () => {
+      telegram!.WebApp.MainButton.offClick(handleMainButtonClick);
+    };
   }, [storeItems, telegram, email, phone]);
 
   useEffect(() => {
