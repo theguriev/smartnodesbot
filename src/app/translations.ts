@@ -10,6 +10,11 @@ const translations = {
       "Any special requests, details, final wishes etc.",
     Add: "Add",
     "Add comment": "Add comment",
+    "Email address": "Email address",
+    "We will send you a receipt and a link to the payment":
+      "We will send you a receipt and a link to the payment",
+    "Phone number": "Phone number",
+    "Contact phone number": "Contact phone number",
   },
   ru: {
     Nodes: "Узлы",
@@ -22,6 +27,11 @@ const translations = {
       "Любые особые пожелания, детали, последние пожелания и т.д.",
     Add: "ДОБАВИТЬ",
     "Add comment": "Добавить комментарий",
+    "Email address": "Адрес электронной почты",
+    "We will send you a receipt and a link to the payment":
+      "Мы вышлем вам чек и ссылку на оплату",
+    "Phone number": "Номер телефона",
+    "Contact phone number": "Контактный номер телефона",
   },
 } as const;
 
