@@ -22,14 +22,18 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
   const telegram = window.Telegram;
   const router = useRouter();
   const pathname = usePathname();
+  const backButtonClick = () => {
+    const backPathname = pathname.replace(/\/[^/]+$/, "");
+    if (backPathname === "") {
+      router.push("/");
+    } else {
+      router.push(backPathname);
+    }
+  };
 
   useEffect(() => {
     telegram?.WebApp.BackButton.show();
-    telegram?.WebApp.BackButton.onClick(() => {
-      const backPathname = pathname.replace(/\/[^/]+$/, "");
-      router.push(backPathname);
-    });
-
+    telegram?.WebApp.BackButton.onClick(backButtonClick);
     return () => {
       telegram?.WebApp.BackButton.offClick(router.back);
     };
