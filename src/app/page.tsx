@@ -1,15 +1,12 @@
-"use client";
 import { Suspense } from "react";
 import Projects from "./components/Projects";
 import Skeleton from "./components/Skeleton";
 import Tabs from "./components/Tabs";
-import { usePathname } from "next/navigation";
 
 const Home = () => {
-  const pathname = usePathname();
   return (
     <>
-      <Tabs path={pathname} />
+      <Tabs />
       <Suspense
         fallback={
           <div className="flex justify-center">
@@ -20,8 +17,7 @@ const Home = () => {
         }
       >
         <div className="flex justify-center">
-          <div className="max-w-[360px] flex justify-center">
-            {/* @ts-expect-error Server Component */}
+        <div className="w-[360px] flex justify-center">
             <Projects />
           </div>
         </div>

@@ -11,41 +11,59 @@ const ListItem: FC<
   Project & {
     onAdd: (id: number) => void;
     onRemove: (id: number) => void;
+    onItemClick: (id: number) => void;
     amount: number;
   }
-> = ({ onAdd, onRemove, amount, ...project }) => {
-  const [hasError, setHasError] = useState(!project.imageUrl);
+> = ({
+  onAdd,
+  onRemove,
+  onItemClick,
+  amount,
+  id,
+  imageUrl,
+  name,
+  monthlyPrice,
+}) => {
+  const [hasError, setHasError] = useState(!imageUrl);
   const handleAddClick = () => {
-    onAdd(project.id);
+    onAdd(id);
   };
 
   const handleRemoveClick = () => {
-    onRemove(project.id);
+    onRemove(id);
   };
 
   const handleImageError = () => {
     setHasError(true);
   };
 
+  const handleItemClick = () => {
+    onItemClick(id);
+  };
+
   return (
     <div className="relative w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
-      <Badge amount={amount} name={project.name} />
+      <Badge amount={amount} name={name} />
       <div>
         {hasError && (
-          <div className="h-20 w-20 rounded-full animate-pulse bg-tg_secondary_bg_color" />
+          <div
+            className="h-20 w-20 rounded-full animate-pulse bg-tg_secondary_bg_color cursor-pointer"
+            onClick={handleItemClick}
+          />
         )}
         {!hasError && (
           <Image
-            className="rounded-full"
-            src={project.imageUrl}
+            className="rounded-full cursor-pointer"
+            src={imageUrl}
             width={74}
             height={74}
             onError={handleImageError}
-            alt={project.name}
+            alt={name}
+            onClick={handleItemClick}
           />
         )}
       </div>
-      <Title price={project.monthlyPrice} title={project.name} />
+      <Title price={monthlyPrice} title={name} onClick={handleItemClick} />
       <ListItemButtons
         onAdd={handleAddClick}
         onRemove={handleRemoveClick}
