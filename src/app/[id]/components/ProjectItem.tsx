@@ -39,48 +39,40 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
     };
   }, [telegram, router]);
 
+  const handleIconClick = (path: string) => {
+    telegram.WebApp.openLink(path);
+  };
+
   const renderIcons = () => {
     const icons: ReactElement[] = [];
     if (project.discord) {
       icons.push(
-        <Link key="discord" href={project.discord}>
-          <DiscordIcon />
-        </Link>
+        <DiscordIcon onClick={() => handleIconClick(project.discord)} />
       );
     }
     if (project.github) {
       icons.push(
-        <Link key="github" href={project.github}>
-          <GithubIcon />
-        </Link>
+        <GithubIcon onClick={() => handleIconClick(project.github)} />
       );
     }
     if (project.medium) {
       icons.push(
-        <Link key="medium" href={project.medium}>
-          <MediumIcon />
-        </Link>
+        <MediumIcon onClick={() => telegram.WebApp.openLink(project.medium)} />
       );
     }
     if (project.reddit) {
       icons.push(
-        <Link key="reddit" href={project.reddit}>
-          <RedditIcon />
-        </Link>
+        <RedditIcon onClick={() => handleIconClick(project.reddit)} />
       );
     }
     if (project.telegram) {
       icons.push(
-        <Link key="telegram" href={project.telegram}>
-          <TelegramIcon />
-        </Link>
+        <TelegramIcon onClick={() => handleIconClick(project.telegram)} />
       );
     }
     if (project.twitter) {
       icons.push(
-        <Link key="twitter" href={project.twitter}>
-          <TwitterIcon />
-        </Link>
+        <TwitterIcon onClick={() => handleIconClick(project.twitter)} />
       );
     }
 
@@ -115,10 +107,10 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
           <Link href={project.url}>{project.url}</Link>
         </div>
 
-        <div className="text-sm text-justify text-tg_text_color">
+        <div className="text-sm text-justify text-tg_text_color mx-6">
           {locale === "ru" ? project.descriptionRu : project.descriptionEn}
         </div>
-        <div className="text-sm text-tg_hint_color flex flex-row gap-3 mt-3">
+        <div className="text-sm text-tg_hint_color flex flex-row gap-3 mt-3 mb-6">
           {renderIcons()}
         </div>
       </div>

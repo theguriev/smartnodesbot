@@ -86,6 +86,10 @@ declare namespace TelegramWebApps {
      * A method that closes the Web App.
      */
     close(): void;
+    /**
+     * A method that opens a link in an external browser. The Web App will not be closed.
+     */
+    openLink(url): void;
   }
 
   interface ThemeParams {
