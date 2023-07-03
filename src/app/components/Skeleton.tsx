@@ -16,7 +16,7 @@ const Skeleton: FC = () => {
               <div className="h-20 w-20 rounded-full animate-pulse bg-tg_secondary_bg_color" />
             </div>
             <div className="text-sm h-3 w-16 rounded animate-pulse bg-tg_secondary_bg_color" />
-            <div className="bg-gray-200 w-20 h-8 rounded animate-pulse bg-tg_secondary_bg_color" />
+            <div className="w-20 h-8 rounded animate-pulse bg-tg_secondary_bg_color" />
           </div>
         ))}
       </div>

@@ -35,11 +35,7 @@ const ProjectItem: FC<Project> = ({
 
     const handleBackButtonClick = () => {
       const backPathname = pathname.replace(/\/[^/]+$/, "");
-      if (backPathname === "") {
-        router.push("/");
-        return;
-      }
-      router.push(backPathname);
+      router.push(backPathname || "/");
     };
 
     window.Telegram.WebApp.BackButton.onClick(handleBackButtonClick);
@@ -52,10 +48,9 @@ const ProjectItem: FC<Project> = ({
     <div className="flex justify-center mt-4">
       <div className="max-w-[360px] flex flex-col items-center gap-2">
         <div>
-          {hasError && (
+          {hasError ? (
             <div className="h-20 w-20 rounded-full animate-pulse bg-tg_secondary_bg_color cursor-pointer" />
-          )}
-          {!hasError && (
+          ) : (
             <Image
               className="rounded-full cursor-pointer"
               src={imageUrl}
