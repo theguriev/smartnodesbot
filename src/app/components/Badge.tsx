@@ -35,8 +35,7 @@ const getAnimationName = (
 
 const Badge: FC<{
   amount: number;
-  name: string;
-}> = ({ amount, name }) => {
+}> = ({ amount }) => {
   const prevAmountRef = useRef(amount);
   const [animation, setAnimation] = useState<Animations | undefined>(
     amount > 0 ? "animate-badgeShow" : "animate-badgeHide"

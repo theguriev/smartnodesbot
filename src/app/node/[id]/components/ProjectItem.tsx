@@ -7,7 +7,23 @@ import { Project } from "@/app/types";
 import getLocale from "@/app/utils/getLocale";
 import SocialIcons from "./SocialIcons";
 
-const ProjectItem: FC<Project> = ({
+const ProjectItem: FC<
+  Pick<
+    Project,
+    | "imageUrl"
+    | "name"
+    | "github"
+    | "medium"
+    | "telegram"
+    | "twitter"
+    | "reddit"
+    | "url"
+    | "descriptionEn"
+    | "descriptionRu"
+    | "monthlyPrice"
+    | "discord"
+  >
+> = ({
   imageUrl,
   name,
   github,
