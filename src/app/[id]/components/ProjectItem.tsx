@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState, useEffect, ReactElement } from "react";
+import { FC, useState, useEffect, ReactElement, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,22 +22,24 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
   const telegram = window.Telegram;
   const router = useRouter();
   const pathname = usePathname();
-  const backButtonClick = () => {
-    const backPathname = pathname.replace(/\/[^/]+$/, "");
-    if (backPathname === "") {
-      router.push("/");
-    } else {
-      router.push(backPathname);
-    }
-  };
 
   useEffect(() => {
     telegram?.WebApp.BackButton.show();
-    telegram?.WebApp.BackButton.onClick(backButtonClick);
-    return () => {
-      telegram?.WebApp.BackButton.offClick(router.back);
+
+    const handleBackButtonClick = () => {
+      const backPathname = pathname.replace(/\/[^/]+$/, "");
+      if (backPathname === "") {
+        router.push("/");
+        return;
+      }
+      router.push(backPathname);
     };
-  }, [telegram, router]);
+
+    telegram?.WebApp.BackButton.onClick(handleBackButtonClick);
+    return () => {
+      telegram?.WebApp.BackButton.offClick(handleBackButtonClick);
+    };
+  }, [telegram, router, pathname]);
 
   const handleIconClick = (path: string) => {
     telegram.WebApp.openLink(path);
