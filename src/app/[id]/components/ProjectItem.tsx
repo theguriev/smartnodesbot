@@ -4,16 +4,17 @@ import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/app/types";
-
 import { DiscordIcon } from "./DiscordIcon";
 import { GithubIcon } from "./GithubIcon";
 import { MediumIcon } from "./MediumIcon";
 import { RedditIcon } from "./RedditIcon";
 import { TelegramIcon } from "./TelegramIcon";
 import { TwitterIcon } from "./TwitterIcon";
+import getLocale from "@/app/utils/getLocale";
 
 const ProjectItem: FC<{ project: Project }> = ({ project }) => {
   const [hasError, setHasError] = useState(!project.imageUrl);
+  const locale = getLocale();
   const handleImageError = () => {
     setHasError(true);
   };
@@ -103,13 +104,15 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
         <div className="font-bold text-tg_text_color text-lg">
           {project.name}
         </div>
-        <div>{project.monthlyPrice}$ / month</div>
+        <div className="text-tg_text_color">
+          {project.monthlyPrice}$ / month
+        </div>
         <div className="text-sm text-tg_hint_color">
           <Link href={project.url}>{project.url}</Link>
         </div>
 
         <div className="text-sm text-justify text-tg_text_color">
-          {project.descriptionEn}
+          {locale === "ru" ? project.descriptionRu : project.descriptionEn}
         </div>
         <div className="text-sm text-tg_hint_color flex flex-row gap-3 mt-3">
           {renderIcons()}
