@@ -1,30 +1,37 @@
 "use client";
-import { FC, useState, useEffect, ReactElement, useCallback } from "react";
+import { FC, useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/app/types";
-import { DiscordIcon } from "./DiscordIcon";
-import { GithubIcon } from "./GithubIcon";
-import { MediumIcon } from "./MediumIcon";
-import { RedditIcon } from "./RedditIcon";
-import { TelegramIcon } from "./TelegramIcon";
-import { TwitterIcon } from "./TwitterIcon";
 import getLocale from "@/app/utils/getLocale";
+import SocialIcons from "./SocialIcons";
 
-const ProjectItem: FC<{ project: Project }> = ({ project }) => {
-  const [hasError, setHasError] = useState(!project.imageUrl);
+const ProjectItem: FC<Project> = ({
+  imageUrl,
+  name,
+  github,
+  medium,
+  telegram,
+  twitter,
+  reddit,
+  url,
+  descriptionEn,
+  descriptionRu,
+  monthlyPrice,
+  discord,
+}) => {
+  const [hasError, setHasError] = useState(!imageUrl);
   const locale = getLocale();
   const handleImageError = () => {
     setHasError(true);
   };
 
-  const telegram = window.Telegram;
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    telegram?.WebApp.BackButton.show();
+    window.Telegram.WebApp.BackButton.show();
 
     const handleBackButtonClick = () => {
       const backPathname = pathname.replace(/\/[^/]+$/, "");
@@ -35,51 +42,11 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
       router.push(backPathname);
     };
 
-    telegram?.WebApp.BackButton.onClick(handleBackButtonClick);
+    window.Telegram.WebApp.BackButton.onClick(handleBackButtonClick);
     return () => {
-      telegram?.WebApp.BackButton.offClick(handleBackButtonClick);
+      window.Telegram.WebApp.BackButton.offClick(handleBackButtonClick);
     };
   }, [telegram, router, pathname]);
-
-  const handleIconClick = (path: string) => {
-    telegram.WebApp.openLink(path);
-  };
-
-  const renderIcons = () => {
-    const icons: ReactElement[] = [];
-    if (project.discord) {
-      icons.push(
-        <DiscordIcon onClick={() => handleIconClick(project.discord)} />
-      );
-    }
-    if (project.github) {
-      icons.push(
-        <GithubIcon onClick={() => handleIconClick(project.github)} />
-      );
-    }
-    if (project.medium) {
-      icons.push(
-        <MediumIcon onClick={() => telegram.WebApp.openLink(project.medium)} />
-      );
-    }
-    if (project.reddit) {
-      icons.push(
-        <RedditIcon onClick={() => handleIconClick(project.reddit)} />
-      );
-    }
-    if (project.telegram) {
-      icons.push(
-        <TelegramIcon onClick={() => handleIconClick(project.telegram)} />
-      );
-    }
-    if (project.twitter) {
-      icons.push(
-        <TwitterIcon onClick={() => handleIconClick(project.twitter)} />
-      );
-    }
-
-    return icons;
-  };
 
   return (
     <div className="flex justify-center mt-4">
@@ -91,29 +58,32 @@ const ProjectItem: FC<{ project: Project }> = ({ project }) => {
           {!hasError && (
             <Image
               className="rounded-full cursor-pointer"
-              src={project.imageUrl}
+              src={imageUrl}
               width={74}
               height={74}
               onError={handleImageError}
-              alt={project.name}
+              alt={name}
             />
           )}
         </div>
-        <div className="font-bold text-tg_text_color text-lg">
-          {project.name}
-        </div>
-        <div className="text-tg_text_color">
-          {project.monthlyPrice}$ / month
-        </div>
+        <div className="font-bold text-tg_text_color text-lg">{name}</div>
+        <div className="text-tg_text_color">{monthlyPrice}$ / month</div>
         <div className="text-sm text-tg_hint_color">
-          <Link href={project.url}>{project.url}</Link>
+          <Link href={url}>{url}</Link>
         </div>
 
         <div className="text-sm text-justify text-tg_text_color mx-6">
-          {locale === "ru" ? project.descriptionRu : project.descriptionEn}
+          {locale === "ru" ? descriptionRu : descriptionEn}
         </div>
         <div className="text-sm text-tg_hint_color flex flex-row gap-3 mt-3 mb-6">
-          {renderIcons()}
+          <SocialIcons
+            discord={discord}
+            github={github}
+            twitter={twitter}
+            reddit={reddit}
+            medium={medium}
+            telegram={telegram}
+          />
         </div>
       </div>
     </div>
