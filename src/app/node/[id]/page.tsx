@@ -1,8 +1,8 @@
-import fetchTestnet from "@/app/api/fetchTestnet";
-import ProjectItem from "@/app/node/[id]/components/ProjectItem";
+import fetchProject from "../../api/fetchProject";
+import ProjectItem from "./components/ProjectItem";
 
-const TestnetPage = async ({ params: { id } }: { params: { id: number } }) => {
-  const response = await fetchTestnet({ id });
+const ItemPage = async ({ params: { id } }: { params: { id: number } }) => {
+  const response = await fetchProject({ id });
 
   return (
     <ProjectItem
@@ -22,4 +22,4 @@ const TestnetPage = async ({ params: { id } }: { params: { id: number } }) => {
   );
 };
 
-export default TestnetPage;
+export default ItemPage;

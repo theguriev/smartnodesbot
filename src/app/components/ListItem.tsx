@@ -43,7 +43,7 @@ const ListItem: FC<
 
   return (
     <div className="relative w-[120px] h-[159px] flex flex-col items-center justify-center gap-2">
-      <Badge amount={amount} name={name} />
+      <Badge amount={amount} />
       <div>
         {hasError && (
           <div

@@ -47,10 +47,10 @@ const List: FC<{ projects: Array<Project> }> = ({ projects }) => {
 
   const handleItemClick = (id: number) => {
     if (pathname === "/") {
-      router.push(`/${id}`);
-    } else {
-      router.push(`${pathname}/${id}`);
+      router.push(`/node/${id}`);
+      return;
     }
+    router.push(`${pathname}/${id}`);
   };
 
   return (
