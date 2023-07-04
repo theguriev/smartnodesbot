@@ -31,6 +31,9 @@ const getAnimationName = (
       ? "animate-badgeDecrementSame"
       : "animate-badgeDecrement";
   }
+  if (prev === next && prev > 0) {
+    return "animate-badgeShow";
+  }
 };
 
 const Badge: FC<{
